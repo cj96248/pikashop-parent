@@ -18,7 +18,7 @@ public class GeneratorSqlmap {
 
 	public void generator() throws Exception{
 
-		List<String> warnings = new ArrayList<String>();
+		List<String> warnings = new ArrayList<>();
 		boolean overwrite = true;
 		//指定 逆向工程配置文件
 		File configFile = new File("pikashop-auto-generator/generatorConfig.xml");

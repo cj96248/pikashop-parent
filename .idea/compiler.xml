@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="pikashop-auto-generator" />
         <module name="pikashop-common" />
         <module name="pikashop-dao" />
         <module name="pikashop-entity" />

@@ -4,11 +4,12 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="pikashop-merchant-service"/>
-    <dubbo:registry address="zookeeper://192.168.99.100:32770"></dubbo:registry>
-    <dubbo:annotation package="com.chao.demo.service"/>
+    <dubbo:application name="pikashop-management"/>
+    <dubbo:registry address="zookeeper://192.168.99.100:2181"></dubbo:registry>
+    <dubbo:annotation package="com.chao"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">

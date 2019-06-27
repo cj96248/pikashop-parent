@@ -17,16 +17,16 @@
 		var app = angular.module('pikashop',[]);
 		app.controller('brandController', function ($scope, $http) {
 			$scope.findAll=function () {
-				$http.get('../brand/list').success(
+				$http.get('../manage/brand/list').success(
 						function (response) {
 							$scope.list = response;
 						}
-				)
+				);
 			}
-		})
+		});
 	</script>
 </head>
-<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="brandController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="brandController" ng-init="findAll()">
   <!-- .box-body -->
                     <div class="box-header with-border">
                         <h3 class="box-title">品牌管理</h3>
@@ -70,7 +70,7 @@
 			                      <tbody>
 			                          <tr ng-repeat="b in list">
 			                              <td><input  type="checkbox" ></td>			                              
-				                          <td>{{b.id}}}</td>
+				                          <td>{{b.id}}</td>
 									      <td>{{b.name}}</td>
 		                                  <td>{{b.logo}}</td>
 		                                  <td class="text-center">                                           
@@ -106,8 +106,8 @@
 		      		<td><input  class="form-control" placeholder="品牌名称" >  </td>
 		      	</tr>		      	
 		      	<tr>
-		      		<td>首字母</td>
-		      		<td><input  class="form-control" placeholder="首字母">  </td>
+		      		<td>品牌标志</td>
+		      		<td><input  class="form-control" placeholder="品牌标志字母">  </td>
 		      	</tr>		      	
 			 </table>				
 		</div>

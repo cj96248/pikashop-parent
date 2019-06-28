@@ -11,8 +11,8 @@
     <dubbo:registry address="zookeeper://192.168.99.100:2181" timeout="50000"></dubbo:registry>
     <dubbo:annotation package="com.chao"/>
 
-    <mvc:annotation-driven />
     <mvc:default-servlet-handler />
+    <mvc:annotation-driven />
 
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">

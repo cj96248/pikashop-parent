@@ -19,11 +19,18 @@
     select
     <include refid="Base_Column_List" />
     from tb_brand
-    order by logo desc;
+    order by logo asc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_brand
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByIds">
+    delete from tb_brand
+    where id in
+    <foreach item="item" collection="array" index="index" open="(" close=")" separator=",">
+    #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.chao.mybatis.pojo.BrandDo">
     insert into tb_brand (id, name, logo

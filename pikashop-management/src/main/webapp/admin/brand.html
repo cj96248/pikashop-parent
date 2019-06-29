@@ -12,9 +12,12 @@
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
 	<script src="../plugins/angularjs/angular.min.js"></script>
+	<!-- 分页组件 -->
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
 
 	<script type="text/javascript">
-		var app = angular.module('pikashop',[]);
+		var app = angular.module('pikashop',['pagination']);
 		app.controller('brandController', function ($scope, $http) {
 			$scope.findAll=function () {
 				$http.get('../manage/brand/list').success(
@@ -23,10 +26,77 @@
 						}
 				);
 			}
+			$scope.paginationConf = {
+				currentPage: 1,
+				totalItems: 10,
+				itemsPerPage: 10,
+				perPageOptions: [5, 10, 20, 30],
+				onChange: function(){
+					$scope.reloadList();
+				}
+			};
+			$scope.reloadList = function(){
+				$scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+			}
+
+			$scope.findPage=function (page, size) {
+				$http.get("../manage/brand/pages?pageNum=" + page + "&pageSize=" + size).success(
+						function (response) {
+							$scope.list = response.data;
+							$scope.paginationConf.totalItems = response.total;
+				})
+			}
+
+			$scope.save=function(){
+				var methodName = "add";
+				if($scope.brand.id != null){
+					methodName = "update";
+				}
+				$http.post("../manage/brand/"+methodName, $scope.brand).success(
+						function (response) {
+							if(response.status){
+								$scope.reloadList();
+							}
+						}
+				)
+			}
+
+			$scope.findOne= function (id) {
+				$http.get('../manage/brand/one?id='+ id).success(
+						function (response) {
+							if(response.status){
+								$scope.brand = response.data;
+							}
+						}
+				)
+			}
+
+			$scope.selectedBrands = [];
+			$scope.updateSelectId=function ($event, id) {
+				if($event.target.checked){
+					$scope.selectedBrands.push(id);
+				}else{
+					var index = $scope.selectedBrands.indexOf(id);
+					$scope.selectedBrands.splice(index, 1);
+				}
+				console.log($scope.selectedBrands);
+			}
+
+			$scope.deleteBrands=function () {
+				$http.get('../manage/brand/delete?ids='+$scope.selectedBrands).success(
+						function (response) {
+							if(response.status){
+								$scope.reloadList();
+								$scope.selectedBrands = [];
+							}
+						}
+				)
+			}
+
 		});
 	</script>
 </head>
-<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="brandController" ng-init="findAll()">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="brandController" >
   <!-- .box-body -->
                     <div class="box-header with-border">
                         <h3 class="box-title">品牌管理</h3>
@@ -41,8 +111,8 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="brand={}"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除" ng-click="deleteBrands()"><i class="fa fa-trash-o"></i> 删除</button>
                                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
                                 </div>
@@ -69,18 +139,18 @@
 			                      </thead>
 			                      <tbody>
 			                          <tr ng-repeat="b in list">
-			                              <td><input  type="checkbox" ></td>			                              
+			                              <td><input  type="checkbox" ng-click="updateSelectId($event, b.id)" ></td>
 				                          <td>{{b.id}}</td>
 									      <td>{{b.name}}</td>
 		                                  <td>{{b.logo}}</td>
 		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button>                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(b.id)" >修改</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>
 			                  </table>
-			                  <!--数据列表/-->                        
-							  
+			                  <!--数据列表/-->
+							<tm-pagination conf="paginationConf"></tm-pagination>
 							 
                         </div>
                         <!-- 数据表格 /-->
@@ -103,16 +173,16 @@
 			<table class="table table-bordered table-striped"  width="800px">
 		      	<tr>
 		      		<td>品牌名称</td>
-		      		<td><input  class="form-control" placeholder="品牌名称" >  </td>
+		      		<td><input  class="form-control" placeholder="品牌名称" ng-model="brand.name">  </td>
 		      	</tr>		      	
 		      	<tr>
 		      		<td>品牌标志</td>
-		      		<td><input  class="form-control" placeholder="品牌标志字母">  </td>
+		      		<td><input  class="form-control" placeholder="品牌标志字母" ng-model="brand.logo">  </td>
 		      	</tr>		      	
 			 </table>				
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">保存</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

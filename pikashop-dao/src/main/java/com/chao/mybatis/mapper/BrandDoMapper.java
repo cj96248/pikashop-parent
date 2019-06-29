@@ -19,4 +19,6 @@ public interface BrandDoMapper {
     int updateByPrimaryKeySelective(BrandDo record);
 
     int updateByPrimaryKey(BrandDo record);
+
+    void deleteByIds(long[] ids);
 }

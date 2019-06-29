@@ -44,4 +44,8 @@ public class CommonResult<T> implements Serializable {
     public static CommonResult build(String message, boolean status){
         return new CommonResult(0, message, status, null);
     }
+    public static CommonResult build(CommonEnum commonEnum){
+        return new CommonResult(0, commonEnum.message(), ((commonEnum.code()&1)==1)?false:true, null);
+    }
+
 }

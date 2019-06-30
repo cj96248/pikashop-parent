@@ -32,6 +32,14 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public CommonResult<List<BrandDo>> searchBrand(String keyword, int pageNum, int pageSize) {
+        log.info("Search -> {}, from {} to {}"+ keyword, pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
+        Page<BrandDo> pages = (Page<BrandDo>) brandDoMapper.searchBrand(keyword);
+        return CommonResult.build(pages.getTotal(), pages.getResult());
+    }
+
+    @Override
     public void insert(BrandDo brand) {
         brandDoMapper.insert(brand);
     }

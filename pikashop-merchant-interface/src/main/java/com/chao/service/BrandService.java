@@ -12,6 +12,8 @@ public interface BrandService {
 
     CommonResult<List<BrandDo>> listBrandPage(int pageNum, int pageSize);
 
+    CommonResult<List<BrandDo>> searchBrand(String keyword, int pageNum, int pageSize);
+
     void insert(BrandDo brand);
 
     BrandDo selectById(long id);
@@ -19,4 +21,5 @@ public interface BrandService {
     void updateById(BrandDo brand);
 
     void deleteByIds(long[] ids);
+
 }

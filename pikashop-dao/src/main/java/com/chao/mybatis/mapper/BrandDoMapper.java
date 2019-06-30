@@ -2,6 +2,7 @@ package com.chao.mybatis.mapper;
 
 
 import com.chao.mybatis.pojo.BrandDo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface BrandDoMapper {
     BrandDo selectByPrimaryKey(Long id);
 
     List<BrandDo> listBrand();
+
+    List<BrandDo> searchBrand(@Param("keyword") String keyword);
 
     int updateByPrimaryKeySelective(BrandDo record);
 

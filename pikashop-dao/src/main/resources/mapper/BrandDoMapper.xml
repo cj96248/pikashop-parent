@@ -15,10 +15,21 @@
     from tb_brand
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="listBrand" resultMap="BaseResultMap">
+  <select id="listBrand" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from tb_brand
+    order by logo asc
+  </select>
+  <select id="searchBrand" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_brand
+    <where>
+      <if test="keyword != null">
+        name LIKE CONCAT('%',#{keyword,jdbcType=VARCHAR},'%') or logo LIKE CONCAT(#{keyword,jdbcType=VARCHAR},'%')
+      </if>
+    </where>
     order by logo asc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

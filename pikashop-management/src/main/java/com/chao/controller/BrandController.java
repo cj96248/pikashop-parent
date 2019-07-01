@@ -3,6 +3,7 @@ package com.chao.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.chao.common.viewobject.CommonEnum;
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.mybatis.pojo.BrandDo;
 import com.chao.service.BrandService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,10 @@ public class BrandController {
     public CommonResult<List<BrandDo>> findPage(int pageNum, int pageSize){
         return brandService.listBrandPage(pageNum, pageSize);
     }
-
+    @RequestMapping("/search")
+    public CommonResult<List<BrandDo>> search(String keyword, int pageNum, int pageSize){
+        return brandService.searchBrand(keyword, pageNum, pageSize);
+    }
     @RequestMapping("/add")
     public CommonResult insert(@RequestBody BrandDo brand){
         try {
@@ -66,5 +70,10 @@ public class BrandController {
         }catch (Exception e){
             return CommonResult.build(CommonEnum.DELETE_FAILED);
         }
+    }
+
+    @RequestMapping("/selections")
+    public List<SelectResult> listBrands(){
+        return brandService.listSelectionBrand();
     }
 }

@@ -36,7 +36,7 @@
 				}
 			};
 			$scope.reloadList = function(){
-				$scope.findPage($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+				$scope.searchBrand($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
 			}
 
 			$scope.findPage=function (page, size) {
@@ -79,7 +79,6 @@
 					var index = $scope.selectedBrands.indexOf(id);
 					$scope.selectedBrands.splice(index, 1);
 				}
-				console.log($scope.selectedBrands);
 			}
 
 			$scope.deleteBrands=function () {
@@ -91,6 +90,18 @@
 							}
 						}
 				)
+			}
+
+			$scope.searchBrand=function (page, size) {
+				var words = '';
+				if($scope.keyword){
+					words = $scope.keyword;
+				}
+				$http.get("../manage/brand/search?pageNum=" + page + "&pageSize=" + size + "&keyword=" + words).success(
+							function (response) {
+								$scope.list = response.data;
+								$scope.paginationConf.totalItems = response.total;
+				})
 			}
 
 		});
@@ -119,7 +130,7 @@
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-							                                         
+							            <input ng-model="keyword" ><button  class="btn btn-default"  ng-click="reloadList()">搜索</button>
                                 </div>
                             </div>
                             <!--工具栏/-->

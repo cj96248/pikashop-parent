@@ -1,8 +1,10 @@
 package com.chao.service.impl;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.entity.viewobject.Specification;
 import com.chao.mybatis.mapper.SpecOptionDoMapper;
 import com.chao.mybatis.mapper.SpecificationDoMapper;
@@ -37,6 +39,15 @@ public class SpecificationServiceImpl implements SpecificationService {
 	@Override
 	public List<SpecificationDo> findAll() {
 		return specificationMapper.selectByExample(null);
+	}
+
+	@Override
+	public List<SelectResult> findSpecSelections() {
+		List<SpecificationDo> specifications = specificationMapper.selectByExample(null);
+//		if(!specifications.isEmpty()){
+//			return specifications.stream().map(s -> new SelectResult(s.getId(), s.getSpecName())).collect(Collectors.toList());
+//		}
+		return null;
 	}
 
 	/**

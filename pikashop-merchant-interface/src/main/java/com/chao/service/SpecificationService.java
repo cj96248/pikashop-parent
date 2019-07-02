@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.entity.viewobject.Specification;
 import com.chao.mybatis.pojo.SpecificationDo;
 
@@ -18,7 +19,8 @@ public interface SpecificationService {
 	 * @return
 	 */
 	public List<SpecificationDo> findAll();
-	
+
+	public List<SelectResult> findSpecSelections();
 	
 	/**
 	 * 返回分页列表

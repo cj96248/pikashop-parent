@@ -42,6 +42,18 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
+		<table schema="" tableName="tb_goods" domainObjectName="GoodsDo"></table>
+		<table schema="" tableName="tb_goods_desc" domainObjectName="GoodsDescDo"></table>
+		<table schema="" tableName="tb_item" domainObjectName="ItemDo"></table>
+		<table schema="" tableName="tb_item_cat" domainObjectName="ItemCatDo"></table>
+		<table schema="" tableName="tb_item_spec_option" domainObjectName="ItemSpecDo"></table>
+		<table schema="" tableName="tb_order" domainObjectName="OrderDo"></table>
+		<table schema="" tableName="tb_order_item" domainObjectName="OrderItemDo"></table>
+		<table schema="" tableName="tb_seller" domainObjectName="SellerDo"></table>
+		<table schema="" tableName="tb_specification" domainObjectName="SpecificationDo"></table>
+		<table schema="" tableName="tb_specification_option" domainObjectName="SpecOptionDo"></table>
+		<table schema="" tableName="tb_type_template" domainObjectName="TypeTemplateDo"></table>
+		<table schema="" tableName="tb_user" domainObjectName="UserDo"></table>
 		<!-- 
       <table schema="" tableName="tb_address"></table>
       <table schema="" tableName="tb_areas"></table>
@@ -65,10 +77,12 @@
       <table schema="" tableName="tb_type_template"></table>
       <table schema="" tableName="tb_user"></table>
 		 -->
+		<!--
 		<table schema="" tableName="tb_brand" domainObjectName="BrandDo"
 			   enableCountByExample="false" enableUpdateByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   selectByExampleQueryId="false"></table>
+         -->
 		<!-- 有些表的字段需要指定java类型
               <table schema="" tableName="">
                  <columnOverride column="" javaType="" />

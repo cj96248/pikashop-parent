@@ -1,11 +1,18 @@
 app.controller('baseController', function ($scope) {
+    var isreloaded = true;
     $scope.paginationConf = {
         currentPage: 1,
         totalItems: 10,
         itemsPerPage: 10,
         perPageOptions: [5, 10, 20, 30],
         onChange: function(){
-            $scope.reloadList();
+            if(isreloaded){
+                $scope.reloadList();
+                isreloaded = false;
+            }
+            setTimeout(function () {
+                isreloaded = true;
+            },200);
         }
     };
     $scope.reloadList = function(){

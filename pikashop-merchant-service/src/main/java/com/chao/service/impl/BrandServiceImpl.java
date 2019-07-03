@@ -2,6 +2,7 @@ package com.chao.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.mybatis.mapper.BrandDoMapper;
 import com.chao.mybatis.pojo.BrandDo;
 import com.chao.service.BrandService;
@@ -10,7 +11,9 @@ import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -29,6 +32,15 @@ public class BrandServiceImpl implements BrandService {
         PageHelper.startPage(pageNum, pageSize);
         Page<BrandDo> pages = (Page<BrandDo>) brandDoMapper.listBrand();
         return CommonResult.build(pages.getTotal(), pages.getResult());
+    }
+
+    @Override
+    public List<SelectResult> listSelectionBrand() {
+        List<BrandDo> brands = brandDoMapper.listBrand();
+//        if(!brands.isEmpty()){
+//            return brands.stream().map(b -> new SelectResult(b.getId(),b.getName())).collect(Collectors.toList());
+//        }
+        return null;
     }
 
     @Override

@@ -8,7 +8,7 @@
         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
+    <dubbo:protocol name="dubbo" port="20881" host="169.254.254.66"></dubbo:protocol>
 
     <dubbo:application name="pikashop-merchant-service"/>
     <dubbo:registry address="zookeeper://192.168.99.100:2181" timeout="50000"/>

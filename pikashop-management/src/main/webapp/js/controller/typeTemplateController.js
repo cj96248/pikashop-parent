@@ -25,12 +25,11 @@ app.controller('typeTemplateController',function ($scope,$controller,brandServic
     $scope.findOne=function(id){
         typeTemplateService.findOne(id).success(
             function(response){
-                $scope.tp= response;
-
+                $scope.typ = response;
                 //转换字符串为json对象（集合）
-                $scope.tp.brandIds=  JSON.parse( $scope.tp.brandIds);
-                $scope.tp.specIds= JSON.parse($scope.tp.specIds);
-                $scope.tp.customAttributeItems = JSON.parse($scope.tp.customAttributeItems);
+                $scope.typ.brandIds=  JSON.parse( $scope.typ.brandIds);
+                $scope.typ.specIds= JSON.parse($scope.typ.specIds);
+                $scope.typ.customAttributeItems = JSON.parse($scope.typ.customAttributeItems);
 
             }
         );
@@ -39,10 +38,10 @@ app.controller('typeTemplateController',function ($scope,$controller,brandServic
     //保存
     $scope.save=function(){
         var serviceObject;//服务层对象
-        if($scope.entity.id!=null){//如果有ID
-            serviceObject=typeTemplateService.update( $scope.entity ); //修改
+        if($scope.typ.id!=null){//如果有ID
+            serviceObject=typeTemplateService.update( $scope.typ ); //修改
         }else{
-            serviceObject=typeTemplateService.add( $scope.entity  );//增加
+            serviceObject=typeTemplateService.add( $scope.typ  );//增加
         }
         serviceObject.success(
             function(response){
@@ -81,9 +80,7 @@ app.controller('typeTemplateController',function ($scope,$controller,brandServic
             }
         );
     }
-
     $scope.brandList={data:[]};//品牌列表
-
     //读取品牌列表
     $scope.findBrandList=function(){
         brandService.findBrandSelections().success(
@@ -92,9 +89,7 @@ app.controller('typeTemplateController',function ($scope,$controller,brandServic
             }
         );
     }
-
     $scope.specList={data:[]};//规格列表
-
     //读取规格列表
     $scope.findSpecList=function(){
         specificationService.selectOptionList().success(
@@ -104,13 +99,19 @@ app.controller('typeTemplateController',function ($scope,$controller,brandServic
         );
     }
 
+    $scope.initSelections=function(){
+        $scope.findBrandList();
+        $scope.findSpecList();
+
+    }
+
     //增加扩展属性行
     $scope.addTableRow=function(){
-        $scope.entity.customAttributeItems.push({});
+        $scope.typ.customAttributeItems.push({});
     }
     //删除扩展属性行
     $scope.deleTableRow=function(index){
-        $scope.entity.customAttributeItems.splice( index,1);
+        $scope.typ.customAttributeItems.splice( index,1);
     }
 
 })

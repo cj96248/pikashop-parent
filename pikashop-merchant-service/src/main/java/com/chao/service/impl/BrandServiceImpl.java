@@ -37,9 +37,9 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public List<SelectResult> listSelectionBrand() {
         List<BrandDo> brands = brandDoMapper.listBrand();
-//        if(!brands.isEmpty()){
-//            return brands.stream().map(b -> new SelectResult(b.getId(),b.getName())).collect(Collectors.toList());
-//        }
+        if(!brands.isEmpty()){
+            return brands.stream().map(b -> new SelectResult(b.getId(),b.getName())).collect(Collectors.toList());
+        }
         return null;
     }
 

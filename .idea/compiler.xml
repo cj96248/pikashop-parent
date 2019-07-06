@@ -13,6 +13,7 @@
         <module name="pikashop-management" />
         <module name="pikashop-merchant-interface" />
         <module name="pikashop-merchant-service" />
+        <module name="pikashop-seller" />
         <module name="pikashop-website" />
       </profile>
     </annotationProcessing>

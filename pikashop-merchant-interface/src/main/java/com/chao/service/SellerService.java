@@ -57,5 +57,7 @@ public interface SellerService {
 	 * @return
 	 */
 	public CommonResult<SellerDo> findPage(SellerDo seller, int pageNum, int pageSize);
+
+	void updateStatus(String sellerId, String status);
 	
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
@@ -14,23 +13,30 @@
     <link rel="stylesheet" href="../css/style.css">
 	<script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
-    
+
+	<script src="../plugins/angularjs/angular.min.js"></script>
+
+	<script src="../plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+
+	<script type="text/javascript" src="../js/base-pagination.js"></script>
+	<script type="text/javascript" src="../js/service/sellerService.js"></script>
+	<script type="text/javascript" src="../js/controller/baseController.js"></script>
+	<script type="text/javascript" src="../js/controller/sellerController.js"></script>
+
+
 </head>
 
-<body class="hold-transition skin-red sidebar-mini"  >
+<body class="hold-transition skin-red sidebar-mini"  ng-app="pikashop" ng-controller="sellerController">
   <!-- .box-body -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">商家管理</h3>
                     </div>
-
                     <div class="box-body">
-
                         <!-- 数据表格 -->
                         <div class="table-box">
-
                             <!--工具栏-->
-                            
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
 							        公司名称：<input  >
@@ -63,35 +69,21 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr>
+			                          <tr ng-repeat="seller in list">
 			                              <td><input  type="checkbox"></td>			                              
-				                          <td>1</td>
-									      <td>梦琪琪商贸有限公司</td>
-									      <td>梦琪琪</td>
-									      <td>李梦琪</td>
-									      <td>13402312232</td>
+				                          <td>{{seller.sellerId}}</td>
+									      <td>{{seller.name}}</td>
+									      <td>{{seller.nickName}}</td>
+									      <td>{{seller.linkmanName}}</td>
+									      <td>{{seller.telephone}}</td>
 		                                  <td>
-			                                  <span>未审核</span>	
-										     
+			                                  <span ng-if="seller.status==0">待审核</span>
+											  <span ng-if="seller.status==1">已审核</span>
+											  <span ng-if="seller.status==2">审核未通过</span>
+											  <span ng-if="seller.status==3">已关闭</span>
 		                                  </td>
 		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#sellerModal" >详情</button>                                           
-		                                  </td>
-			                          </tr>
-									  <tr>
-			                              <td><input  type="checkbox"></td>			                              
-				                          <td>2</td>
-									      <td>黑瞎子苹果专卖店</td>
-									      <td>黑瞎子</td>
-									      <td>孙大鹏</td>
-									      <td>13622244111</td>
-		                                  <td>
-			                                  
-										      <span>审核通过</span>	
-										      
-		                                  </td>
-		                                  <td class="text-center">                                           
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#sellerModal" >详情</button>                                           
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#sellerModal" ng-click="findOne(seller.sellerId)" >详情</button>
 		                                  </td>
 			                          </tr>
 			                      </tbody>
@@ -101,15 +93,9 @@
 							 
                         </div>
                         <!-- 数据表格 /-->
-                        
-                        
-                        
-                        
+
                      </div>
                     <!-- /.box-body -->
-                    
-	          
-					    
                                 
 <!-- 商家详情 -->
 <div class="modal fade" id="sellerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -136,19 +122,15 @@
 			      <table class="table table-bordered table-striped"  width="800px">
 			      	<tr>
 			      		<td>公司名称</td>
-			      		<td>美琪数码经营店</td>
-			      	</tr>
-			      	<tr>
-			      		<td>公司手机</td>
-			      		<td>13900221212</td>
+			      		<td>{{seller.name}}</td>
 			      	</tr>
 			      	<tr>
 			      		<td>公司电话</td>
-			      		<td>010-20112222</td>
+			      		<td>{{seller.telephone}}</td>
 			      	</tr>
 			      	<tr>
 			      		<td>公司详细地址</td>
-			      		<td>北京市西三旗建材城西路888号</td>
+			      		<td>{{seller.addressDetail}}</td>
 			      	</tr>
 			      </table>			      
       			</div>	
@@ -157,19 +139,15 @@
 					<table class="table table-bordered table-striped" >
 			      	<tr>
 			      		<td>联系人姓名</td>
-			      		<td>王美琪</td>
+			      		<td>{{seller.linkmanName}}</td>
 			      	</tr>
 			      	<tr>
 			      		<td>联系人QQ</td>
-			      		<td>78223322</td>
-			      	</tr>
-			      	<tr>
-			      		<td>联系人手机</td>
-			      		<td>13500223322</td>
+			      		<td>{{seller.linkmanQq}}</td>
 			      	</tr>
 			      	<tr>
 			      		<td>联系人E-Mail</td>
-			      		<td>78223322@qq.com</td>
+			      		<td>{{seller.linkmanEmail}}</td>
 			      	</tr>
 			      </table>
 			    </div>
@@ -226,9 +204,9 @@
 			
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">审核通过</button>
-         	<button class="btn btn-danger"  data-dismiss="modal" aria-hidden="true">审核未通过</button>
-            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">关闭商家</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'1')" ng-if="seller.status==0">审核通过</button>
+         	<button class="btn btn-danger"  data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'2')" ng-if="seller.status==0">审核未通过</button>
+            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'3')" ng-if="seller.status==0">关闭商家</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

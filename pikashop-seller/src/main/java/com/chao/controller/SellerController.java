@@ -5,6 +5,8 @@ import com.chao.common.viewobject.CommonEnum;
 import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.SellerDo;
 import com.chao.service.SellerService;
+import com.chao.util.PasswordUtil;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,10 +51,10 @@ public class SellerController {
 	@RequestMapping("/add")
 	public CommonResult add(@RequestBody SellerDo seller){
 		try {
+			seller.setPassword(PasswordUtil.encrypt(seller.getPassword()));
 			sellerService.add(seller);
 			return CommonResult.build(CommonEnum.SAVE_SUCCESS);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CommonResult.build(CommonEnum.SAVE_FAILED);
 		}
 	}
@@ -68,10 +70,25 @@ public class SellerController {
 			sellerService.update(seller);
 			return CommonResult.build(CommonEnum.UPDATE_SUCCESS);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CommonResult.build(CommonEnum.UPDATE_FAILED);
 		}
-	}	
+	}
+
+	/**
+	 * 修改密码
+	 * @param oldPassword
+	 * @param newPassword
+	 * @return
+	 */
+	@RequestMapping("/changePassword")
+	public CommonResult changePassword(String id, String oldPassword, String newPassword){
+		try {
+			CommonEnum commonEnum = sellerService.changePassword(id, oldPassword, newPassword);
+			return CommonResult.build(commonEnum);
+		} catch (Exception e) {
+			return CommonResult.build(CommonEnum.UPDATE_FAILED);
+		}
+	}
 	
 	/**
 	 * 获取实体
@@ -119,7 +136,6 @@ public class SellerController {
 			e.printStackTrace();
 			return CommonResult.build(CommonEnum.UPDATE_FAILED);
 		}
-		
 	}
 	
 }

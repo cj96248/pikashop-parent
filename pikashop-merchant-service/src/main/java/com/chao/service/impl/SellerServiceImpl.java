@@ -3,11 +3,13 @@ package com.chao.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.chao.common.viewobject.CommonEnum;
 import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.mapper.SellerDoMapper;
 import com.chao.mybatis.pojo.SellerDo;
 import com.chao.mybatis.pojo.SellerDoExample;
 import com.chao.service.SellerService;
+import com.chao.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -41,6 +43,7 @@ public class SellerServiceImpl implements SellerService {
         Page<SellerDo> page = (Page<SellerDo>) sellerMapper.selectByExample(null);
         return CommonResult.build(page.getTotal(), page.getResult());
     }
+
     /**
      * 增加
      */
@@ -50,6 +53,7 @@ public class SellerServiceImpl implements SellerService {
         seller.setCreateTime(new Date());//申请日期
         sellerMapper.insert(seller);
     }
+
     /**
      * 修改
      */
@@ -78,6 +82,7 @@ public class SellerServiceImpl implements SellerService {
             sellerMapper.deleteByPrimaryKey(id);
         }
     }
+
     @Override
     public CommonResult<SellerDo> findPage(SellerDo seller, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
@@ -162,5 +167,20 @@ public class SellerServiceImpl implements SellerService {
         SellerDo seller = sellerMapper.selectByPrimaryKey(sellerId);
         seller.setStatus(status);
         sellerMapper.updateByPrimaryKey(seller);
+    }
+
+    @Override
+    public CommonEnum changePassword(String id, String oldPassword, String newPassword) {
+        SellerDo seller = sellerMapper.selectByPrimaryKey(id);
+        if(seller != null && PasswordUtil.compare(oldPassword, seller.getPassword())){
+            seller.setPassword(PasswordUtil.encrypt(newPassword));
+            int row = sellerMapper.updateByPrimaryKey(seller);
+            if(row != 0){
+                return CommonEnum.UPDATE_SUCCESS;
+            }
+        }else{
+            return CommonEnum.UPDATE_PASSWORD_FAILED;
+        }
+        return CommonEnum.UPDATE_FAILED;
     }
 }

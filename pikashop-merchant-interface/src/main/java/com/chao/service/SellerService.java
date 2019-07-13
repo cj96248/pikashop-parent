@@ -1,6 +1,7 @@
 package com.chao.service;
 import java.util.List;
 
+import com.chao.common.viewobject.CommonEnum;
 import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.SellerDo;
 /**
@@ -22,8 +23,7 @@ public interface SellerService {
 	 * @return
 	 */
 	public CommonResult<SellerDo> findPage(int pageNum, int pageSize);
-	
-	
+
 	/**
 	 * 增加
 	*/
@@ -31,10 +31,14 @@ public interface SellerService {
 	
 	
 	/**
-	 * 修改
+	 * 修改基本信息
 	 */
 	public void update(SellerDo seller);
-	
+
+	/**
+	 * 修改密码
+	 */
+	CommonEnum changePassword(String id, String oldPassword, String newPassword);
 
 	/**
 	 * 根据ID获取实体

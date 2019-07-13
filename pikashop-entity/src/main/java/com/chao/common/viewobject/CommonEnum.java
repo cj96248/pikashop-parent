@@ -8,6 +8,7 @@ public enum CommonEnum {
     DELETE_FAILED(20011, "删除失败"),
     UPDATE_SUCCESS(20020, "更新成功"),
     UPDATE_FAILED(20021, "更新失败"),
+    UPDATE_PASSWORD_FAILED(20023, "密码不匹配"),
     NOT_FOUND(30011, "未找到结果")
     ;
     private int code;

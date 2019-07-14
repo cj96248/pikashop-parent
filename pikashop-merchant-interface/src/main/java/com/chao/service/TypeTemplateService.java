@@ -1,5 +1,6 @@
 package com.chao.service;
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.mybatis.pojo.TypeTemplateDo;
 
 import java.util.List;
@@ -58,6 +59,8 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	public CommonResult<TypeTemplateDo> findPage(TypeTemplateDo typeTemplate, int pageNum, int pageSize);
+
+	List<SelectResult> findTypeSelections();
 	
 
 	

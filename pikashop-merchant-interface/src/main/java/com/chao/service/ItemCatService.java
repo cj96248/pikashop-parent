@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.ItemCatDo;
+
 /**
  * 服务层接口
  * @author Administrator
@@ -57,5 +58,7 @@ public interface ItemCatService {
 	 * @return
 	 */
 	public CommonResult<ItemCatDo> findPage(ItemCatDo itemCat, int pageNum, int pageSize);
+
+	List<ItemCatDo> findByParentId(Long parentId);
 	
 }

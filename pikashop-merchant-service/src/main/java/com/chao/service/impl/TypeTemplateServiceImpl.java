@@ -1,7 +1,10 @@
 package com.chao.service.impl;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.chao.common.viewobject.CommonResult;
+import com.chao.common.viewobject.SelectResult;
 import com.chao.mybatis.mapper.TypeTemplateDoMapper;
 import com.chao.mybatis.pojo.TypeTemplateDo;
 import com.chao.mybatis.pojo.TypeTemplateDoExample;
@@ -101,6 +104,15 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 		
 		Page<TypeTemplateDo> page= (Page<TypeTemplateDo>)typeTemplateMapper.selectByExample(example);
 		return CommonResult.build(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public List<SelectResult> findTypeSelections() {
+		List<TypeTemplateDo> list = typeTemplateMapper.selectByExample(null);
+		if(list != null){
+			return list.stream().map(t -> new SelectResult(t.getId(), t.getName())).collect(Collectors.toList());
+		}
+		return new ArrayList<>();
 	}
 
 

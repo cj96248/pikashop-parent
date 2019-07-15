@@ -24,7 +24,7 @@
 		 function SetIFrameHeight(){
 		  	  var iframeid=document.getElementById("iframe"); //iframe id
 		  	  if (document.getElementById){
-		  		iframeid.height =document.documentElement.clientHeight;			   	   
+		  		iframeid.height =document.documentElement.clientHeight -52;
 			  }
 		 }
 	</script>
@@ -45,9 +45,9 @@
             <!-- Logo -->
             <a href="index.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>鼠兔商城</b></span>
+                <span class="logo-mini"><b>PK商城</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>鼠兔商城-运营商后台</b></span>
+                <span class="logo-lg"><b>PK商城-运营商后台</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -324,16 +324,18 @@
 				        </a>
 				        <ul class="treeview-menu">
 				
-				            <li id="admin-login">
-				                <a href="seller_check.html" target="iframe">
+				            <li>
+				                <a href="seller_manage.html" target="iframe">
 				                    <i class="fa fa-circle-o"></i>商家审核
 				                </a>
 				            </li>
-							<li id="admin-login">
+                            <!--
+							<li>
 				                <a href="seller_manage.html" target="iframe">
 				                    <i class="fa fa-circle-o"></i>商家管理
 				                </a>
 				            </li>
+				            -->
 				        </ul>                        
 				    </li>
 					<li class="treeview">
@@ -411,15 +413,6 @@
  
         </div>
         <!-- 内容区域 /-->
-
-        <!-- 底部导航 -->
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0.8
-            </div>
-            <strong>Copyright &copy; 2014-2017 <a href="http://www.itcast.cn">研究院研发部</a>.</strong> All rights reserved.
-        </footer>
-        <!-- 底部导航 /-->
 
     </div>
 

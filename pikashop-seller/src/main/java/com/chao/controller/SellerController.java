@@ -6,7 +6,6 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.SellerDo;
 import com.chao.service.SellerService;
 import com.chao.util.PasswordUtil;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -125,17 +124,6 @@ public class SellerController {
 	@RequestMapping("/search")
 	public CommonResult search(@RequestBody SellerDo seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
-	}
-	
-	@RequestMapping("/updateStatus")
-	public CommonResult updateStatus(String sellerId,String status){
-		try {
-			sellerService.updateStatus(sellerId, status);
-			return CommonResult.build(CommonEnum.UPDATE_SUCCESS);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return CommonResult.build(CommonEnum.UPDATE_FAILED);
-		}
 	}
 	
 }

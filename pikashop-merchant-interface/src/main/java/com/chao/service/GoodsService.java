@@ -1,6 +1,7 @@
 package com.chao.service;
 
 import com.chao.common.viewobject.CommonResult;
+import com.chao.entity.viewobject.GoodsVO;
 import com.chao.mybatis.pojo.GoodsDo;
 
 import java.util.List;
@@ -29,13 +30,13 @@ public interface GoodsService {
 	/**
 	 * 增加
 	*/
-	public void add(GoodsDo goods);
+	public void add(GoodsVO goods);
 	
 	
 	/**
 	 * 修改
 	 */
-	public void update(GoodsDo goods);
+	public void update(GoodsVO goods);
 	
 
 	/**
@@ -44,7 +45,8 @@ public interface GoodsService {
 	 * @return
 	 */
 	public GoodsDo findOne(Long id);
-	
+
+	public GoodsVO findOneDetail(Long id);
 	
 	/**
 	 * 批量删除

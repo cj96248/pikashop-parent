@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- 设置登录页面不登陆也可以访问的资源 -->
+    <http pattern="/login.html" security="none"></http>
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/img/**" security="none"></http>
+    <http pattern="/js/**" security="none"></http>
+    <http pattern="/plugins/**" security="none"></http>
+
+    <!-- 页面的拦截规则    use-expressions:是否启动SPEL表达式 默认是true -->
+    <http use-expressions="false">
+        <!-- 当前用户必须有ROLE_USER的角色 才可以访问根目录及所属子目录的资源 -->
+        <intercept-url pattern="/**" access="ROLE_USER"/>
+        <!-- 开启表单登陆功能 -->
+        <form-login login-page="/login.html" default-target-url="/admin/index.html" authentication-failure-url="/admin/index.html" always-use-default-target="true"/>
+        <logout />
+        <csrf disabled="true"/>
+        <!-- 只显示同源域名下的 -->
+        <headers>
+           <frame-options policy="SAMEORIGIN"/>
+        </headers>
+    </http>
+
+    <!-- 认证管理器 -->
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="admin" authorities="ROLE_USER"/>
+                <user name="anne" password="123456" authorities="ROLE_USER"/>
+                <user name="eric" password="111111" authorities="ROLE_USER"/>
+                <user name="jack" password="666666" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

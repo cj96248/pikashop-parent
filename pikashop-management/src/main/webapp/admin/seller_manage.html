@@ -16,18 +16,14 @@
 
 	<script src="../plugins/angularjs/angular.min.js"></script>
 
-	<script src="../plugins/angularjs/pagination.js"></script>
-	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
-
-	<script type="text/javascript" src="../js/base-pagination.js"></script>
+	<script type="text/javascript" src="../js/base.js"></script>
 	<script type="text/javascript" src="../js/service/sellerService.js"></script>
 	<script type="text/javascript" src="../js/controller/baseController.js"></script>
-	<script type="text/javascript" src="../js/controller/sellerController.js"></script>
-
+	<script type="text/javascript" src="../js/controller/sellersController.js"></script>
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini"  ng-app="pikashop" ng-controller="sellerController">
+<body class="hold-transition skin-red sidebar-mini"  ng-app="pikashop" ng-controller="sellerController" ng-init="findAll()">
   <!-- .box-body -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -156,15 +152,15 @@
 					<table class="table table-bordered table-striped" >
 				      	<tr>
 				      		<td>营业执照号</td>
-				      		<td>330106000109206</td>
+				      		<td>{{seller.licenseNumber}}</td>
 				      	</tr>
 				      	<tr>
 				      		<td>税务登记证号</td>
-				      		<td>0292039393011</td>
+				      		<td>{{seller.taxNumber}}</td>
 				      	</tr>
 				      	<tr>
 				      		<td>组织机构代码证号</td>
-				      		<td>22320320302421</td>
+				      		<td>{{seller.orgNumber}}</td>
 				      	</tr>				      	
 			     	</table>
 			    </div>
@@ -173,11 +169,11 @@
 					<table class="table table-bordered table-striped" >
 				      	<tr>
 				      		<td>法定代表人</td>
-				      		<td>王小聪</td>
+				      		<td>{{seller.legalPerson}}</td>
 				      	</tr>
 				      	<tr>
 				      		<td>法定代表人身份证号</td>
-				      		<td>211030198503223122</td>
+				      		<td>{{seller.legalPersonCardId}}</td>
 				      	</tr>					   			      	
 			     	</table>
 			    </div>
@@ -186,16 +182,12 @@
 					<table class="table table-bordered table-striped" >
 				      	<tr>
 				      		<td>开户行名称</td>
-				      		<td>中国建设银行北京市分行</td>
+				      		<td>{{seller.bankName}}</td>
 				      	</tr>
 				      	<tr>
-				      		<td>开户行支行</td>
-				      		<td>海淀支行</td>
-				      	</tr>		
-				      	<tr>
-				      		<td>银行账号</td>
-				      		<td>999000111222</td>
-				      	</tr>			   			      	
+				      		<td>开户人姓名</td>
+				      		<td>{{seller.bankUser}}</td>
+				      	</tr>
 			     	</table>					
 			    </div>
   			    </div> 			
@@ -204,9 +196,9 @@
 			
 		</div>
 		<div class="modal-footer">						
-			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'1')" ng-if="seller.status==0">审核通过</button>
-         	<button class="btn btn-danger"  data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'2')" ng-if="seller.status==0">审核未通过</button>
-            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'3')" ng-if="seller.status==0">关闭商家</button>
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'1')" ng-if="seller.status != 1">审核通过</button>
+         	<button class="btn btn-danger"  data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'2')" ng-if="seller.status != 2 ">审核未通过</button>
+            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" ng-click="updateStatus(seller.sellerId,'3')" ng-if="seller.status != 3 ">关闭商家</button>
 			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
 		</div>
 	  </div>

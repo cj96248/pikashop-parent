@@ -5,12 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SelectResult implements Serializable {
-    private long id;
+public class SelectAllResult implements Serializable {
 
     private String text;
+
+    private List<String> options;
 }

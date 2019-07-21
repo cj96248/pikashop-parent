@@ -9,6 +9,7 @@ import com.chao.mybatis.pojo.GoodsDescDo;
 import com.chao.mybatis.pojo.GoodsDo;
 import com.chao.mybatis.pojo.GoodsDoExample;
 import com.chao.service.GoodsService;
+import com.chao.util.LoginUserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
@@ -54,7 +55,8 @@ public class GoodsServiceImpl implements GoodsService {
 	 */
 	@Override
 	public void add(GoodsVO goods) {
-
+		String userId = LoginUserUtil.getUserId();
+		goods.getGoods().setSellerId(userId);
 		goods.getGoods().setAuditStatus("0");//状态：未审核
 		goodsMapper.insert(goods.getGoods());//插入商品基本信息
 		log.info("Insert goods id {}", goods.getGoods().getId());

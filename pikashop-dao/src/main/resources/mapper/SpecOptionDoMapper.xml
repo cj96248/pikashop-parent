@@ -88,6 +88,12 @@
     from tb_specification_option
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectBySpecId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_specification_option
+    where spec_id = #{spec_id,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tb_specification_option
     where id = #{id,jdbcType=BIGINT}

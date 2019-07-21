@@ -23,6 +23,8 @@ public interface SpecOptionDoMapper {
 
     SpecOptionDo selectByPrimaryKey(Long id);
 
+    List<SpecOptionDo> selectBySpecId(Long id);
+
     int updateByExampleSelective(@Param("record") SpecOptionDo record, @Param("example") SpecOptionDoExample example);
 
     int updateByExample(@Param("record") SpecOptionDo record, @Param("example") SpecOptionDoExample example);

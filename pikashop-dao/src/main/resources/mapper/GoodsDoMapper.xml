@@ -112,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.chao.mybatis.pojo.GoodsDo">
+  <insert id="insert" parameterType="com.chao.mybatis.pojo.GoodsDo" keyProperty="id" useGeneratedKeys="true">
     insert into tb_goods (id, seller_id, goods_name, 
       default_item_id, audit_status, is_marketable, 
       brand_id, caption, category1_id, 

@@ -6,6 +6,7 @@
     <result column="parent_id" jdbcType="BIGINT" property="parentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, name, type_id
+    id, parent_id, name, type_id, grade
   </sql>
   <select id="selectByExample" parameterType="com.chao.mybatis.pojo.ItemCatDoExample" resultMap="BaseResultMap">
     select
@@ -100,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.chao.mybatis.pojo.ItemCatDo">
     insert into tb_item_cat (id, parent_id, name, 
-      type_id)
+      type_id, grade)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{typeId,jdbcType=BIGINT})
+      #{typeId,jdbcType=BIGINT}, #{grade,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.chao.mybatis.pojo.ItemCatDo">
     insert into tb_item_cat
@@ -119,6 +120,9 @@
       <if test="typeId != null">
         type_id,
       </if>
+      <if test="grade != null">
+        grade,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -132,6 +136,9 @@
       </if>
       <if test="typeId != null">
         #{typeId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -156,6 +163,9 @@
       <if test="record.typeId != null">
         type_id = #{record.typeId,jdbcType=BIGINT},
       </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,7 +176,8 @@
     set id = #{record.id,jdbcType=BIGINT},
       parent_id = #{record.parentId,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      type_id = #{record.typeId,jdbcType=BIGINT}
+      type_id = #{record.typeId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -183,6 +194,9 @@
       <if test="typeId != null">
         type_id = #{typeId,jdbcType=BIGINT},
       </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -190,7 +204,8 @@
     update tb_item_cat
     set parent_id = #{parentId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
-      type_id = #{typeId,jdbcType=BIGINT}
+      type_id = #{typeId,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

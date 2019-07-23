@@ -6,6 +6,7 @@ import com.chao.entity.viewobject.LoginUser;
 import com.chao.entity.viewobject.UserStatusEnum;
 import com.chao.mybatis.pojo.SellerDo;
 import com.chao.service.SellerService;
+import com.chao.util.LoginUserUtil;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class SellerLoginController {
     public CommonResult getSellerDetail(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy年M月d日 HH:mm");
         String date = LocalDateTime.now().format(formatter);
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        String name = LoginUserUtil.getUserId();
         SellerDo seller = sellerService.findOne(name);
         LoginUser user = new LoginUser().setId(seller.getSellerId()).setName(seller.getNickName()).setStatus(UserStatusEnum.valuesOf(seller.getStatus())).setLoginTime(date);
         return CommonResult.build(1, user);

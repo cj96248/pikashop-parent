@@ -108,5 +108,10 @@ public class TypeTemplateController {
 		return typeTemplateService.findPage(typeTemplate, page, rows);
 	}
 
+	@RequestMapping("/selections")
+	public List<SelectResult> listBrands(){
+		return typeTemplateService.findTypeSelections();
+	}
+
 	
 }

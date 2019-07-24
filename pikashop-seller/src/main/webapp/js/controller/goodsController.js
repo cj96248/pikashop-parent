@@ -1,5 +1,4 @@
- //控制层 
-app.controller('goodsController' ,function($scope,$controller,goodsService,uploadService){
+app.controller('goodsController' ,function($scope,$controller,goodsService,uploadService,itemCatService, typeTemplateService, productService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -33,7 +32,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 						alert(response.message);
 					}
 				}
-		);				
+		);
 	}
 
 	$scope.item = {goods:{}, goodsDesc:{itemImages:[]}}
@@ -54,5 +53,76 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 		$scope.item.goodsDesc.itemImages.splice(index, 1);
 	}
 
+	$scope.initMethod = function(){
+		$scope.loadCategory1();
+	}
+
+	$scope.loadCategory1 = function () {
+		itemCatService.findChildren(0).success(
+			function (response) {
+				$scope.category1IdList = response;
+			}
+		)
+	}
+	$scope.$watch('item.goods.category1Id',function (newValue, oldValue) {
+		if(newValue == undefined){
+			// do nothing here
+		}else{
+			itemCatService.findChildren(newValue).success(
+				function (response) {
+					$scope.category2IdList = response;
+					$scope.typeTemplateInfo ='';
+				}
+			)
+		}
+	})
+
+	$scope.$watch('item.goods.category2Id',function (newValue, oldValue) {
+		if(newValue == undefined){
+			// do nothing here
+		}else {
+			itemCatService.findChildren(newValue).success(
+				function (response) {
+					$scope.category3IdList = response;
+					$scope.typeTemplateInfo = '';
+				}
+			)
+		}
+	})
+	
+	$scope.$watch('item.goods.category3Id', function (newValue, oldValue) {
+		if(newValue == undefined){
+			// do nothing here
+		}else {
+			itemCatService.findOne(newValue).success(
+				function (response) {
+					$scope.item.goods.typeTemplateId = response.typeId;
+					$scope.typeTemplateInfo = "模板编号为 " + response.typeId;
+				}
+			);
+		}
+	})
+	$scope.$watch('item.goods.typeTemplateId', function (newValue, oldValue) {
+		if(newValue == undefined){
+			// do nothing here
+		}else {
+			typeTemplateService.findOne(newValue).success(
+				function (response) {
+					$scope.brandList = JSON.parse(response.brandIds);
+					$scope.item.goodsDesc.customAttributeItems = JSON.parse(response.customAttributeItems);
+				}
+			);
+			productService.findSpecs(newValue).success(
+				function (response) {
+					$scope.specList = response;
+				}
+			)
+		}
+	})
+	
+	$scope.selectSpecs = function (name, value) {
+		
+	}
+
     
-});	
+});

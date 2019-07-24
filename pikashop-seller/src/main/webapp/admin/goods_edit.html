@@ -24,13 +24,16 @@
 	<script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
 	<script type="text/javascript" src="../js/base.js"></script>
 	<script type="text/javascript" src="../js/service/goodsService.js"></script>
+	<script type="text/javascript" src="../js/service/itemCatService.js"></script>
+	<script type="text/javascript" src="../js/service/typeTemplateService.js"></script>
+	<script type="text/javascript" src="../js/service/productService.js"></script>
 	<script type="text/javascript" src="../js/service/uploadService.js"></script>
 	<script type="text/javascript" src="../js/controller/baseController.js"></script>
 	<script type="text/javascript" src="../js/controller/goodsController.js"></script>
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="goodsController">
+<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="goodsController" ng-init="initMethod()">
 
             <!-- 正文区域 -->
             <section class="content">
@@ -64,28 +67,25 @@
                             <div class="tab-pane active" id="home">
                                 <div class="row data-type">                                  
 								   <div class="col-md-2 title">商品分类</div>
-		                          
 		                           	  <div class="col-md-10 data">
 		                           	  	<table>
 		                           	  		<tr>
 		                           	  			<td>
-		                           	  				<select class="form-control" >														
+		                           	  				<select class="form-control" ng-model="item.goods.category1Id" ng-options="ci.id as ci.name for ci in category1IdList">
 		                           	  				</select>
 		                              			</td>
 		                              			<td>
-		                           	  				<select class="form-control select-sm" ></select>
+		                           	  				<select class="form-control select-sm" ng-model="item.goods.category2Id" ng-options="ci.id as ci.name for ci in category2IdList"></select>
 		                              			</td>
 		                              			<td>
-		                           	  				<select class="form-control select-sm" ></select>
+		                           	  				<select class="form-control select-sm" ng-model="item.goods.category3Id" ng-options="ci.id as ci.name for ci in category3IdList"></select>
 		                              			</td>
 		                              			<td>
-		                           	  				模板ID:19
+		                           	  				{{typeTemplateInfo}}
 		                              			</td>
 		                           	  		</tr>
 		                           	  	</table>
-		                              	
-		                              </div>	                              
-		                          	  
+		                              </div>
 									
 		                           <div class="col-md-2 title">商品名称</div>
 		                           <div class="col-md-10 data">
@@ -94,7 +94,7 @@
 		                           
 		                           <div class="col-md-2 title">品牌</div>
 		                           <div class="col-md-10 data">
-		                              <select class="form-control" ></select>
+		                              <select class="form-control" ng-model="item.goods.brandId" ng-options="brand.id as brand.text for brand in brandList"></select>
 		                           </div>
 		
 								   <div class="col-md-2 title">副标题</div>
@@ -147,7 +147,7 @@
 					                    <tbody>
 					                      <tr ng-repeat="image in item.goodsDesc.itemImages">
 									            <td>
-									           		<img alt="上传后预览" src="{{image.url}}" width="100px" height="100px">
+									           		<img alt="上传后预览" src="{{image.thumbnail_url}}" width="100px" height="100px">
 									            </td>
 												 <td> <button type="button" class="btn btn-default" title="删除" ng-click="removeImage($index)" ><i class="fa fa-trash-o"></i> 删除</button></td>
 					                      </tr>
@@ -161,18 +161,12 @@
                             <!--扩展属性-->
                             <div class="tab-pane" id="customAttribute">
                                 <div class="row data-type">                                
-	                                <div>
-		                                <div class="col-md-2 title">扩展属性1</div>
+	                                <div ng-repeat="att in item.goodsDesc.customAttributeItems">
+		                                <div class="col-md-2 title">{{att.text}}</div>
 				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性1">	            	 
+				                              <input class="form-control" placeholder="{{att.text}}" ng-model="att.value">
 				                        </div>
-	                                </div>       
-									<div>
-		                                <div class="col-md-2 title">扩展属性2</div>
-				                        <div class="col-md-10 data">
-				                              <input class="form-control" placeholder="扩展属性2">	            	 
-				                        </div>
-	                                </div>  									
+	                                </div>
                                 </div>
                             </div>
                       
@@ -190,38 +184,14 @@
                             	
 	                                <div class="row data-type">
 	                                
-		                                <div>
-			                                <div class="col-md-2 title">屏幕尺寸</div>
+		                                <div ng-repeat="spec in specList">
+			                                <div class="col-md-2 title">{{spec.text}}</div>
 					                        <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input  type="checkbox" >4.0					                            				                            	
-					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >4.5					                            				                            	
+					                            <span ng-repeat="option in spec.options">
+					                            	<input  type="checkbox" ng-click="selectSpecs(spec.text, option)">{{option}}
 					                            </span>
-												<span>
-					                            	<input  type="checkbox" >5.0					                            				                            	
-					                            </span>												
-					                            	
 					                        </div>
-		                                </div>   
-										<div>
-			                                <div class="col-md-2 title">网络制式</div>
-					                        <div class="col-md-10 data">
-					                               
-					                            <span>
-					                            	<input  type="checkbox" >2G					                            				                            	
-					                            </span>  	
-												<span>
-					                            	<input  type="checkbox" >3G					                            				                            	
-					                            </span>
-												<span>
-					                            	<input  type="checkbox" >4G					                            				                            	
-					                            </span>												
-					                            	
-					                        </div>
-		                                </div>  
+		                                </div>
 		                                                                                  
 	                                </div>
 	
@@ -364,7 +334,7 @@
 					                </button>
 					            </td>
 								<td>
-									<img  src="{{imageItem.url}}" alt="上传后预览" width="200px" height="200px">
+									<img  src="{{imageItem.thumbnail_url}}" alt="上传后预览" width="200px" height="200px">
 								</td>
 							</tr>						
 						</table>

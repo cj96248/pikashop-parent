@@ -4,23 +4,16 @@
   <resultMap id="BaseResultMap" type="com.chao.mybatis.pojo.ItemDo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="sell_point" jdbcType="VARCHAR" property="sellPoint" />
     <result column="price" jdbcType="DECIMAL" property="price" />
-    <result column="stock_count" jdbcType="INTEGER" property="stockCount" />
     <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
     <result column="image" jdbcType="VARCHAR" property="image" />
     <result column="categoryId" jdbcType="BIGINT" property="categoryid" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="item_sn" jdbcType="VARCHAR" property="itemSn" />
-    <result column="cost_pirce" jdbcType="DECIMAL" property="costPirce" />
-    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
     <result column="is_default" jdbcType="VARCHAR" property="isDefault" />
     <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
     <result column="seller_id" jdbcType="VARCHAR" property="sellerId" />
-    <result column="cart_thumbnail" jdbcType="VARCHAR" property="cartThumbnail" />
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="brand" jdbcType="VARCHAR" property="brand" />
     <result column="spec" jdbcType="VARCHAR" property="spec" />
@@ -85,9 +78,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, sell_point, price, stock_count, num, barcode, image, categoryId, status, 
-    create_time, update_time, item_sn, cost_pirce, market_price, is_default, goods_id, 
-    seller_id, cart_thumbnail, category, brand, spec, seller
+    id, title, price, num, image, categoryId, status, create_time, update_time, is_default, 
+    goods_id, seller_id, category, brand, spec, seller
   </sql>
   <select id="selectByExample" parameterType="com.chao.mybatis.pojo.ItemDoExample" resultMap="BaseResultMap">
     select
@@ -120,22 +112,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.chao.mybatis.pojo.ItemDo">
-    insert into tb_item (id, title, sell_point, 
-      price, stock_count, num, 
-      barcode, image, categoryId, 
+    insert into tb_item (id, title, price, 
+      num, image, categoryId, 
       status, create_time, update_time, 
-      item_sn, cost_pirce, market_price, 
       is_default, goods_id, seller_id, 
-      cart_thumbnail, category, brand, 
-      spec, seller)
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{stockCount,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
-      #{barcode,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{categoryid,jdbcType=BIGINT}, 
+      category, brand, spec, 
+      seller)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{num,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{categoryid,jdbcType=BIGINT}, 
       #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{itemSn,jdbcType=VARCHAR}, #{costPirce,jdbcType=DECIMAL}, #{marketPrice,jdbcType=DECIMAL}, 
       #{isDefault,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR}, 
-      #{cartThumbnail,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
-      #{spec,jdbcType=VARCHAR}, #{seller,jdbcType=VARCHAR})
+      #{category,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
+      #{seller,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.chao.mybatis.pojo.ItemDo">
     insert into tb_item
@@ -146,20 +134,11 @@
       <if test="title != null">
         title,
       </if>
-      <if test="sellPoint != null">
-        sell_point,
-      </if>
       <if test="price != null">
         price,
       </if>
-      <if test="stockCount != null">
-        stock_count,
-      </if>
       <if test="num != null">
         num,
-      </if>
-      <if test="barcode != null">
-        barcode,
       </if>
       <if test="image != null">
         image,
@@ -176,15 +155,6 @@
       <if test="updateTime != null">
         update_time,
       </if>
-      <if test="itemSn != null">
-        item_sn,
-      </if>
-      <if test="costPirce != null">
-        cost_pirce,
-      </if>
-      <if test="marketPrice != null">
-        market_price,
-      </if>
       <if test="isDefault != null">
         is_default,
       </if>
@@ -193,9 +163,6 @@
       </if>
       <if test="sellerId != null">
         seller_id,
-      </if>
-      <if test="cartThumbnail != null">
-        cart_thumbnail,
       </if>
       <if test="category != null">
         category,
@@ -217,20 +184,11 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="sellPoint != null">
-        #{sellPoint,jdbcType=VARCHAR},
-      </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="stockCount != null">
-        #{stockCount,jdbcType=INTEGER},
-      </if>
       <if test="num != null">
         #{num,jdbcType=INTEGER},
-      </if>
-      <if test="barcode != null">
-        #{barcode,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         #{image,jdbcType=VARCHAR},
@@ -247,15 +205,6 @@
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="itemSn != null">
-        #{itemSn,jdbcType=VARCHAR},
-      </if>
-      <if test="costPirce != null">
-        #{costPirce,jdbcType=DECIMAL},
-      </if>
-      <if test="marketPrice != null">
-        #{marketPrice,jdbcType=DECIMAL},
-      </if>
       <if test="isDefault != null">
         #{isDefault,jdbcType=VARCHAR},
       </if>
@@ -264,9 +213,6 @@
       </if>
       <if test="sellerId != null">
         #{sellerId,jdbcType=VARCHAR},
-      </if>
-      <if test="cartThumbnail != null">
-        #{cartThumbnail,jdbcType=VARCHAR},
       </if>
       <if test="category != null">
         #{category,jdbcType=VARCHAR},
@@ -297,20 +243,11 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.sellPoint != null">
-        sell_point = #{record.sellPoint,jdbcType=VARCHAR},
-      </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="record.stockCount != null">
-        stock_count = #{record.stockCount,jdbcType=INTEGER},
-      </if>
       <if test="record.num != null">
         num = #{record.num,jdbcType=INTEGER},
-      </if>
-      <if test="record.barcode != null">
-        barcode = #{record.barcode,jdbcType=VARCHAR},
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=VARCHAR},
@@ -327,15 +264,6 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.itemSn != null">
-        item_sn = #{record.itemSn,jdbcType=VARCHAR},
-      </if>
-      <if test="record.costPirce != null">
-        cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
-      </if>
-      <if test="record.marketPrice != null">
-        market_price = #{record.marketPrice,jdbcType=DECIMAL},
-      </if>
       <if test="record.isDefault != null">
         is_default = #{record.isDefault,jdbcType=VARCHAR},
       </if>
@@ -344,9 +272,6 @@
       </if>
       <if test="record.sellerId != null">
         seller_id = #{record.sellerId,jdbcType=VARCHAR},
-      </if>
-      <if test="record.cartThumbnail != null">
-        cart_thumbnail = #{record.cartThumbnail,jdbcType=VARCHAR},
       </if>
       <if test="record.category != null">
         category = #{record.category,jdbcType=VARCHAR},
@@ -369,23 +294,16 @@
     update tb_item
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
-      sell_point = #{record.sellPoint,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
-      stock_count = #{record.stockCount,jdbcType=INTEGER},
       num = #{record.num,jdbcType=INTEGER},
-      barcode = #{record.barcode,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
       categoryId = #{record.categoryid,jdbcType=BIGINT},
       status = #{record.status,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      item_sn = #{record.itemSn,jdbcType=VARCHAR},
-      cost_pirce = #{record.costPirce,jdbcType=DECIMAL},
-      market_price = #{record.marketPrice,jdbcType=DECIMAL},
       is_default = #{record.isDefault,jdbcType=VARCHAR},
       goods_id = #{record.goodsId,jdbcType=BIGINT},
       seller_id = #{record.sellerId,jdbcType=VARCHAR},
-      cart_thumbnail = #{record.cartThumbnail,jdbcType=VARCHAR},
       category = #{record.category,jdbcType=VARCHAR},
       brand = #{record.brand,jdbcType=VARCHAR},
       spec = #{record.spec,jdbcType=VARCHAR},
@@ -400,20 +318,11 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="sellPoint != null">
-        sell_point = #{sellPoint,jdbcType=VARCHAR},
-      </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="stockCount != null">
-        stock_count = #{stockCount,jdbcType=INTEGER},
-      </if>
       <if test="num != null">
         num = #{num,jdbcType=INTEGER},
-      </if>
-      <if test="barcode != null">
-        barcode = #{barcode,jdbcType=VARCHAR},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=VARCHAR},
@@ -430,15 +339,6 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="itemSn != null">
-        item_sn = #{itemSn,jdbcType=VARCHAR},
-      </if>
-      <if test="costPirce != null">
-        cost_pirce = #{costPirce,jdbcType=DECIMAL},
-      </if>
-      <if test="marketPrice != null">
-        market_price = #{marketPrice,jdbcType=DECIMAL},
-      </if>
       <if test="isDefault != null">
         is_default = #{isDefault,jdbcType=VARCHAR},
       </if>
@@ -447,9 +347,6 @@
       </if>
       <if test="sellerId != null">
         seller_id = #{sellerId,jdbcType=VARCHAR},
-      </if>
-      <if test="cartThumbnail != null">
-        cart_thumbnail = #{cartThumbnail,jdbcType=VARCHAR},
       </if>
       <if test="category != null">
         category = #{category,jdbcType=VARCHAR},
@@ -469,23 +366,16 @@
   <update id="updateByPrimaryKey" parameterType="com.chao.mybatis.pojo.ItemDo">
     update tb_item
     set title = #{title,jdbcType=VARCHAR},
-      sell_point = #{sellPoint,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL},
-      stock_count = #{stockCount,jdbcType=INTEGER},
       num = #{num,jdbcType=INTEGER},
-      barcode = #{barcode,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
       categoryId = #{categoryid,jdbcType=BIGINT},
       status = #{status,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      item_sn = #{itemSn,jdbcType=VARCHAR},
-      cost_pirce = #{costPirce,jdbcType=DECIMAL},
-      market_price = #{marketPrice,jdbcType=DECIMAL},
       is_default = #{isDefault,jdbcType=VARCHAR},
       goods_id = #{goodsId,jdbcType=BIGINT},
       seller_id = #{sellerId,jdbcType=VARCHAR},
-      cart_thumbnail = #{cartThumbnail,jdbcType=VARCHAR},
       category = #{category,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},
       spec = #{spec,jdbcType=VARCHAR},

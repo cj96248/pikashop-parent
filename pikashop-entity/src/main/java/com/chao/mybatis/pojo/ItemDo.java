@@ -1,23 +1,16 @@
 package com.chao.mybatis.pojo;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ItemDo implements Serializable {
+public class ItemDo {
     private Long id;
 
     private String title;
 
-    private String sellPoint;
-
     private BigDecimal price;
 
-    private Integer stockCount;
-
     private Integer num;
-
-    private String barcode;
 
     private String image;
 
@@ -29,19 +22,11 @@ public class ItemDo implements Serializable {
 
     private Date updateTime;
 
-    private String itemSn;
-
-    private BigDecimal costPirce;
-
-    private BigDecimal marketPrice;
-
     private String isDefault;
 
     private Long goodsId;
 
     private String sellerId;
-
-    private String cartThumbnail;
 
     private String category;
 
@@ -67,14 +52,6 @@ public class ItemDo implements Serializable {
         this.title = title == null ? null : title.trim();
     }
 
-    public String getSellPoint() {
-        return sellPoint;
-    }
-
-    public void setSellPoint(String sellPoint) {
-        this.sellPoint = sellPoint == null ? null : sellPoint.trim();
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -83,28 +60,12 @@ public class ItemDo implements Serializable {
         this.price = price;
     }
 
-    public Integer getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(Integer stockCount) {
-        this.stockCount = stockCount;
-    }
-
     public Integer getNum() {
         return num;
     }
 
     public void setNum(Integer num) {
         this.num = num;
-    }
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode == null ? null : barcode.trim();
     }
 
     public String getImage() {
@@ -147,30 +108,6 @@ public class ItemDo implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getItemSn() {
-        return itemSn;
-    }
-
-    public void setItemSn(String itemSn) {
-        this.itemSn = itemSn == null ? null : itemSn.trim();
-    }
-
-    public BigDecimal getCostPirce() {
-        return costPirce;
-    }
-
-    public void setCostPirce(BigDecimal costPirce) {
-        this.costPirce = costPirce;
-    }
-
-    public BigDecimal getMarketPrice() {
-        return marketPrice;
-    }
-
-    public void setMarketPrice(BigDecimal marketPrice) {
-        this.marketPrice = marketPrice;
-    }
-
     public String getIsDefault() {
         return isDefault;
     }
@@ -193,14 +130,6 @@ public class ItemDo implements Serializable {
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId == null ? null : sellerId.trim();
-    }
-
-    public String getCartThumbnail() {
-        return cartThumbnail;
-    }
-
-    public void setCartThumbnail(String cartThumbnail) {
-        this.cartThumbnail = cartThumbnail == null ? null : cartThumbnail.trim();
     }
 
     public String getCategory() {

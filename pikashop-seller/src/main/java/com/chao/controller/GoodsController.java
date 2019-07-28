@@ -5,6 +5,7 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.entity.viewobject.GoodsVO;
 import com.chao.mybatis.pojo.GoodsDo;
 import com.chao.service.GoodsService;
+import com.chao.util.LoginUserUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +14,6 @@ import sun.rmi.runtime.Log;
 
 import java.util.List;
 
-/**
- * controller
- * @author Administrator
- *
- */
 @RestController
 @RequestMapping("/goods")
 public class GoodsController {
@@ -79,7 +75,7 @@ public class GoodsController {
             goodsService.add(goods);
             return CommonResult.build(CommonEnum.SAVE_SUCCESS);
         } catch (Exception e) {
-            e.printStackTrace();
+        	e.printStackTrace();
             return CommonResult.build(CommonEnum.SAVE_FAILED);
         }
     }
@@ -95,7 +91,6 @@ public class GoodsController {
 			goodsService.delete(ids);
 			return CommonResult.build(CommonEnum.DELETE_SUCCESS);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return CommonResult.build(CommonEnum.DELETE_FAILED);
 		}
 	}
@@ -108,7 +103,8 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/search")
-	public CommonResult<GoodsDo> search(@RequestBody GoodsDo goods, int page, int rows  ){
+	public CommonResult<GoodsDo> search(@RequestBody GoodsDo goods, int page, int rows){
+		goods.setSellerId(LoginUserUtil.getUserId());
 		return goodsService.findPage(goods, page, rows);		
 	}
 	

@@ -12,6 +12,10 @@ import java.util.List;
 public class GoodsVO implements Serializable {
     private GoodsDo goods;
     private GoodsDescDo goodsDesc;
+    /**
+     * 商品相关冗余数据
+     */
+    private GoodsRedundant goodsRedundant;
 
-    private List<ItemDo> items;
+    private List<ItemDo> itemList;
 }

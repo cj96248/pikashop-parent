@@ -125,6 +125,23 @@
       #{category,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR}, 
       #{seller,jdbcType=VARCHAR})
   </insert>
+  <insert id="addBatch">
+    insert into tb_item (id, title, price,
+      num, image, categoryId,
+      status, create_time, update_time,
+      is_default, goods_id, seller_id,
+      category, brand, spec,
+      seller)
+    values
+    <foreach collection="items" item="item" separator=",">
+    (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+      #{num,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, #{categoryid,jdbcType=BIGINT},
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{isDefault,jdbcType=VARCHAR}, #{goodsId,jdbcType=BIGINT}, #{sellerId,jdbcType=VARCHAR},
+      #{category,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{spec,jdbcType=VARCHAR},
+      #{seller,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="com.chao.mybatis.pojo.ItemDo">
     insert into tb_item
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -15,6 +15,8 @@ public interface ItemDoMapper {
 
     int insert(ItemDo record);
 
+    int addBatch(@Param("items")List<ItemDo> items);
+
     int insertSelective(ItemDo record);
 
     List<ItemDo> selectByExample(ItemDoExample example);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -75,7 +74,6 @@ public class GoodsController {
             goodsService.add(goods);
             return CommonResult.build(CommonEnum.SAVE_SUCCESS);
         } catch (Exception e) {
-        	e.printStackTrace();
             return CommonResult.build(CommonEnum.SAVE_FAILED);
         }
     }

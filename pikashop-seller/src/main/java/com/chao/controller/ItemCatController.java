@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/itemCat")
@@ -35,5 +37,16 @@ public class ItemCatController {
 	public List<ItemCatDo> findByParentId(Long parentId){
 		return itemCatService.findByParentId(parentId);
 	}
-	
+	/**
+	 * 返回全部列表
+	 * @return
+	 */
+	@RequestMapping("/categories")
+	public List<String> findAll(){
+		List<ItemCatDo> list = itemCatService.findAll();
+		return list.
+				stream()
+				.sorted(Comparator.comparing(ItemCatDo::getId))
+				.map(i -> i.getName()).collect(Collectors.toList());
+	}
 }

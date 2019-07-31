@@ -30,17 +30,14 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="goodsController" >
+<body class="hold-transition skin-red sidebar-mini" ng-app="pikashop" ng-controller="goodsController" ng-init="cacheCategory()">
   <!-- .box-body -->
                     <div class="box-header with-border">
                         <h3 class="box-title">商品管理</h3>
                     </div>
-
                     <div class="box-body">
-
                         <!-- 数据表格 -->
                         <div class="table-box">
-
                             <!--工具栏-->
                             <div class="pull-left">
                                 <div class="form-group form-inline">
@@ -55,15 +52,15 @@
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-                                  状态：<select>
+                                  状态：<select ng-model="item.goods.auditStatus">
                                          	<option value="">全部</option>      
-                                         	<option value="0">未申请</option>    
-                                         	<option value="1">申请中</option>    
-                                         	<option value="2">审核通过</option>    
-                                         	<option value="3">已驳回</option>                                     
+                                         	<option value="0">未审核</option>
+                                         	<option value="1">审核通过</option>
+                                         	<option value="2">已驳回</option>
+                                         	<option value="3">已关闭</option>
                                         </select>
-							                  商品名称：<input >									
-									<button class="btn btn-default" >查询</button>                                    
+							                  商品名称：<input ng-model="item.goods.goodsName">
+									<button class="btn btn-default" ng-click="reloadList()">查询</button>
                                 </div>
                             </div>
                             <!--工具栏/-->
@@ -91,25 +88,16 @@
 				                          <td>{{goods.id}}</td>
 									      <td>{{goods.goodsName}}</td>
 									      <td>{{goods.price}}</td>
-									      <td>{{}}</td>
-									      <td>手机</td>
-									      <td>国产手机</td>
+									      <td>{{categoryList[goods.category1Id]}}</td>
+									      <td>{{categoryList[goods.category2Id]}}</td>
+									      <td>{{categoryList[goods.category3Id]}}</td>
 		                                  <td>
 		                                  	<span>
-		                                  		未申请
-		                                  	</span>
-		                                  	<span >
-		                                  		申请中
-		                                  	</span>
-		                                  	<span>
-		                                  		审核通过
-		                                  	</span>
-		                                  	<span>
-		                                  		已驳回
+		                                  		{{statusInfoList[goods.auditStatus]}}
 		                                  	</span>
 		                                  </td>		                                  
 		                                  <td class="text-center">                                          
-		                                 	  <button type="button" class="btn bg-olive btn-xs">修改</button>                  
+		                                 	  <a href="goods_edit.html#?id={{goods.id}}" class="btn bg-olive btn-xs" >修改</a>
 		                                  </td>
 			                          </tr>
 			                      </tbody>

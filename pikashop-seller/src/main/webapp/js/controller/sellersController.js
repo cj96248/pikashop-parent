@@ -1,7 +1,7 @@
 app.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
-        requireBase: false//必须配置为false，否则<base href=''>这种格式带base链接的地址才能解析
+        requireBase: false//必须配置为false，否则<base href=''>这种格式带base链接的地址不能解析
     });
 }]);
 app.controller('sellerController', function ($scope,$location,sellerService) {

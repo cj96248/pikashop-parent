@@ -1,29 +1,37 @@
-app.controller('goodsController' ,function($scope,$controller,goodsService,uploadService,itemCatService, typeTemplateService, productService){
-	
+app.controller('goodsController' ,function($scope,$controller,$location,goodsService,uploadService,itemCatService, typeTemplateService, productService, loginService){
+
 	$controller('baseController',{$scope:$scope});//继承
-	
+
 	//分页
-	$scope.findPage=function(page,rows){			
-		goodsService.findPage(page,rows).success(
+	$scope.search=function(page,rows){
+		goodsService.search(page,rows,$scope.item.goods).success(
 			function(response){
-				$scope.list=response.rows;	
+				$scope.goodslist=response.data;
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
-		);
-	}
-	
-	//查询实体 
-	$scope.findOne=function(id){				
-		goodsService.findOne(id).success(
-			function(response){
-				$scope.entity= response;					
 			}
-		);				
-	}
-	
+		);
+	};
+
+	checkId = function(){
+		return $location.search()['id'];
+	};
+
+	//查询实体 
+	$scope.findDetail=function(id){
+		goodsService.findDetail(id).success(
+			function(response){
+				$scope.item= response;
+				$scope.item.goods = response.goods;
+			}
+		);
+	};
 	//保存 
 	$scope.save=function(){
 		$scope.item.goodsDesc.introduction=editor.html();
+		$scope.item.goodsRedundant.categoryName = $("#category3").find('option:selected').text();
+		$scope.item.goodsRedundant.brandName = $("#brand").find('option:selected').text();
+		$scope.item.goodsRedundant.imageUrl = $("#imageUrl").text();
+		$scope.item.goods.sellerId = $scope.item.goodsRedundant.sellerId;
 		goodsService.add( $scope.item).success(
 				function(response){
 					if(response.status){
@@ -33,9 +41,10 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 					}
 				}
 		);
-	}
+	};
 
-	$scope.item = {goods:{}, goodsDesc:{itemImages:[]}}
+	$scope.item = {goods:{}, goodsDesc:{itemImages:[],specificationItems:[]},goodsRedundant:{}, itemList:[]};
+
 	$scope.updateImage = function () {
 		uploadService.imageUpload().success(
 			function (response) {
@@ -55,6 +64,19 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 
 	$scope.initMethod = function(){
 		$scope.loadCategory1();
+		checkSeller();
+		var id = checkId();
+		if(id){
+			$scope.findDetail(id);
+		}
+	};
+	checkSeller = function(){
+		loginService.loginSeller().success(
+			function (response) {
+				$scope.item.goodsRedundant.sellerId = response.data.id;
+				$scope.item.goodsRedundant.sellerName = response.data.name;
+			}
+		);
 	}
 
 	$scope.loadCategory1 = function () {
@@ -64,6 +86,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 			}
 		)
 	}
+
 	$scope.$watch('item.goods.category1Id',function (newValue, oldValue) {
 		if(newValue == undefined){
 			// do nothing here
@@ -89,7 +112,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 			)
 		}
 	})
-	
+
 	$scope.$watch('item.goods.category3Id', function (newValue, oldValue) {
 		if(newValue == undefined){
 			// do nothing here
@@ -102,6 +125,7 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 			);
 		}
 	})
+
 	$scope.$watch('item.goods.typeTemplateId', function (newValue, oldValue) {
 		if(newValue == undefined){
 			// do nothing here
@@ -119,10 +143,56 @@ app.controller('goodsController' ,function($scope,$controller,goodsService,uploa
 			)
 		}
 	})
-	
-	$scope.selectSpecs = function (name, value) {
-		
+
+	$scope.selectedSpecs = function ($event, name, value) {
+		var spec = $scope.searchObjectByKey($scope.item.goodsDesc.specificationItems, 'name', name);
+		if(spec != null){
+			if($event.target.checked){
+				spec.value.push(value);
+			}else {
+				spec.value.splice(spec.value.indexOf(value),1);
+				if(spec.value.length == 0){
+					$scope.item.goodsDesc.specificationItems.splice($scope.item.goodsDesc.specificationItems.indexOf(spec),1);
+				}
+			}
+		}else{
+			$scope.item.goodsDesc.specificationItems.push({'name':name,'value':[value]});
+		}
 	}
 
-    
+	$scope.createItems = function(){
+		$scope.item.itemList = [{spec:{}, price:0, num:0, status:'0',isDefault:'0'}];
+		var items = $scope.item.goodsDesc.specificationItems;
+		for(var i =0; i< items.length;i++){
+			$scope.item.itemList = addColumn($scope.item.itemList, items[i].name, items[i].value);
+		}
+		console.log($scope.item.itemList);
+	}
+
+	addColumn = function(list, columnName, columnValues){
+		var newList = [];
+		for(var i = 0; i< list.length; i++){
+			var oldRow = list[i];
+			for(var j=0; j<columnValues.length;j++){
+				var newRow = JSON.parse(JSON.stringify(oldRow));
+				newRow.spec[columnName.trim()] = columnValues[j];
+				console.log(newRow);
+				newList.push(newRow);
+			}
+		}
+		return newList;
+	}
+
+	$scope.statusInfoList = ["未审核","审核通过","已驳回","已关闭"];
+
+	$scope.cacheCategory = function(){
+		itemCatService.findAll().success(
+			function (response) {
+				$scope.categoryList =response;
+
+			}
+		)
+	}
+
+
 });

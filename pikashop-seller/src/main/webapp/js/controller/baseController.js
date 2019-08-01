@@ -34,5 +34,15 @@ app.controller('baseController', function ($scope) {
         }
         return value;
     }
+    //查询数组中某个对象值是否存在
+    // list -> 数组 ; key -> 对象名 ; value -> 对象值
+    $scope.searchObjectByKey= function(list, key, value){
+        for(var i=0; i< list.length;i++){
+            if(list[i][key] == value){
+                return list[i];
+            }
+        }
+        return null;
+    }
 
 });

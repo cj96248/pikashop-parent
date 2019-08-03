@@ -1,4 +1,4 @@
-package com.chao.service;
+package com.chao.seller.service;
 
 import com.chao.common.viewobject.SelectAllResult;
 

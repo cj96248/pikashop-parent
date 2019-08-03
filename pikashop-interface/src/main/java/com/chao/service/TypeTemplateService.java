@@ -6,8 +6,7 @@ import com.chao.mybatis.pojo.TypeTemplateDo;
 import java.util.List;
 
 /**
- * 服务层接口
- * @author Administrator
+ * 类型模板服务层接口
  *
  */
 public interface TypeTemplateService {
@@ -27,39 +26,40 @@ public interface TypeTemplateService {
 	
 	
 	/**
-	 * 增加
+	 * 增加类型模板
 	*/
 	public void add(TypeTemplateDo typeTemplate);
 	
 	
 	/**
-	 * 修改
+	 * 修改类型模板
 	 */
 	public void update(TypeTemplateDo typeTemplate);
 	
 
 	/**
-	 * 根据ID获取实体
+	 * 根据ID获取类型模板
 	 * @param id
-	 * @return
 	 */
 	public TypeTemplateDo findOne(Long id);
 	
 	
 	/**
-	 * 批量删除
+	 * 批量删除类型模板
 	 * @param ids
 	 */
 	public void delete(Long[] ids);
 
 	/**
 	 * 分页
-	 * @param pageNum 当前页 码
+	 * @param pageNum 当前页码
 	 * @param pageSize 每页记录数
-	 * @return
 	 */
 	public CommonResult<TypeTemplateDo> findPage(TypeTemplateDo typeTemplate, int pageNum, int pageSize);
 
+	/**
+	 * 为下拉列表查找所有类型模板，[{id:xx,text:yy},{...}]
+	 */
 	List<SelectResult> findTypeSelections();
 	
 

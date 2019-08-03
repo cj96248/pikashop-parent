@@ -11,9 +11,9 @@
     <module>pikashop-entity</module>
     <module>pikashop-dao</module>
     <module>pikashop-common</module>
-    <module>pikashop-merchant-interface</module>
-      <module>pikashop-merchant-service</module>
-    <module>pikashop-website</module>
+    <module>pikashop-interface</module>
+      <module>pikashop-service</module>
+    <module>pikashop-website-portal</module>
     <module>pikashop-seller</module>
     <module>pikashop-management</module>
       <module>pikashop-auto-generator</module>

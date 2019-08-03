@@ -5,8 +5,7 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.ItemCatDo;
 
 /**
- * 服务层接口
- * @author Administrator
+ * 商品项接口
  *
  */
 public interface ItemCatService {
@@ -53,7 +52,7 @@ public interface ItemCatService {
 
 	/**
 	 * 分页
-	 * @param pageNum 当前页 码
+	 * @param pageNum 当前页码
 	 * @param pageSize 每页记录数
 	 * @return
 	 */

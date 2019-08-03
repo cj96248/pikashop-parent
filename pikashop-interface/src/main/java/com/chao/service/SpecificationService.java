@@ -8,8 +8,7 @@ import com.chao.entity.viewobject.Specification;
 import com.chao.mybatis.pojo.SpecificationDo;
 
 /**
- * 服务层接口
- * @author Administrator
+ * 规格选项服务层接口
  *
  */
 public interface SpecificationService {
@@ -20,23 +19,26 @@ public interface SpecificationService {
 	 */
 	public List<SpecificationDo> findAll();
 
+	/**
+	 * 查找所有规格选项，[{id:xx,text:yy},{...}]
+	 * @return
+	 */
 	public List<SelectResult> findSpecSelections();
 	
 	/**
 	 * 返回分页列表
-	 * @return
 	 */
 	public CommonResult<SpecificationDo> findPage(int pageNum, int pageSize);
 	
 	
 	/**
-	 * 增加
+	 * 增加规格选项
 	*/
 	public void add(Specification specification);
 	
 	
 	/**
-	 * 修改
+	 * 修改规格选项
 	 */
 	public void update(Specification specification);
 	
@@ -44,7 +46,6 @@ public interface SpecificationService {
 	/**
 	 * 根据ID获取实体
 	 * @param id
-	 * @return
 	 */
 	public Specification findOne(Long id);
 	
@@ -57,9 +58,8 @@ public interface SpecificationService {
 
 	/**
 	 * 分页
-	 * @param pageNum 当前页 码
+	 * @param pageNum 当前页码
 	 * @param pageSize 每页记录数
-	 * @return
 	 */
 	public CommonResult<SpecificationDo> findPage(SpecificationDo specification, int pageNum, int pageSize);
 	

@@ -1,4 +1,4 @@
-package com.chao.service.impl;
+package com.chao.seller.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSONArray;
@@ -8,7 +8,7 @@ import com.chao.mybatis.mapper.SpecOptionDoMapper;
 import com.chao.mybatis.mapper.TypeTemplateDoMapper;
 import com.chao.mybatis.pojo.SpecOptionDo;
 import com.chao.mybatis.pojo.TypeTemplateDo;
-import com.chao.service.ProductService;
+import com.chao.seller.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

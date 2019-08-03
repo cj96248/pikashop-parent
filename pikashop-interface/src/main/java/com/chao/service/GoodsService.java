@@ -7,8 +7,7 @@ import com.chao.mybatis.pojo.GoodsDo;
 import java.util.List;
 
 /**
- * 服务层接口
- * @author Administrator
+ * 商品服务层接口
  *
  */
 public interface GoodsService {

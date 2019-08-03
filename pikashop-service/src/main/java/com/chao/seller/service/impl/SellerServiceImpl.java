@@ -1,4 +1,4 @@
-package com.chao.service.impl;
+package com.chao.seller.service.impl;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +8,7 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.mapper.SellerDoMapper;
 import com.chao.mybatis.pojo.SellerDo;
 import com.chao.mybatis.pojo.SellerDoExample;
-import com.chao.service.SellerService;
+import com.chao.seller.service.SellerService;
 import com.chao.util.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;

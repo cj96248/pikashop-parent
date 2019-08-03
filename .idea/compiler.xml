@@ -10,11 +10,11 @@
         <module name="pikashop-common" />
         <module name="pikashop-dao" />
         <module name="pikashop-entity" />
+        <module name="pikashop-interface" />
         <module name="pikashop-management" />
-        <module name="pikashop-merchant-interface" />
-        <module name="pikashop-merchant-service" />
         <module name="pikashop-seller" />
-        <module name="pikashop-website" />
+        <module name="pikashop-service" />
+        <module name="pikashop-website-portal" />
       </profile>
     </annotationProcessing>
   </component>

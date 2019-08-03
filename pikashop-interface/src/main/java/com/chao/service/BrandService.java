@@ -7,6 +7,9 @@ import com.chao.mybatis.pojo.BrandDo;
 
 import java.util.List;
 
+/**
+ * 品牌服务
+ */
 public interface BrandService {
 
     List<BrandDo> listBrand();

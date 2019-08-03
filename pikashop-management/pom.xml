@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-merchant-interface</artifactId>
+            <artifactId>pikashop-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- Spring -->

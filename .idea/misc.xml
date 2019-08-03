@@ -3,9 +3,9 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/pikashop-management" />
-    <file type="web" url="file://$PROJECT_DIR$/pikashop-merchant-service" />
     <file type="web" url="file://$PROJECT_DIR$/pikashop-seller" />
-    <file type="web" url="file://$PROJECT_DIR$/pikashop-website" />
+    <file type="web" url="file://$PROJECT_DIR$/pikashop-service" />
+    <file type="web" url="file://$PROJECT_DIR$/pikashop-website-portal" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

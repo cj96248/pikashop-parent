@@ -4,7 +4,7 @@ import java.util.List;
 import com.chao.common.viewobject.CommonEnum;
 import com.chao.common.viewobject.CommonResult;
 import com.chao.mybatis.pojo.SellerDo;
-import com.chao.service.SellerService;
+import com.chao.seller.service.SellerService;
 import com.chao.util.PasswordUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

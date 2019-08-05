@@ -5,9 +5,8 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.entity.viewobject.LoginUser;
 import com.chao.entity.viewobject.UserStatusEnum;
 import com.chao.mybatis.pojo.SellerDo;
-import com.chao.service.SellerService;
+import com.chao.seller.service.SellerService;
 import com.chao.util.LoginUserUtil;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

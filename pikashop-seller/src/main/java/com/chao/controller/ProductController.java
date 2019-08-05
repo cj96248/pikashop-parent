@@ -2,7 +2,7 @@ package com.chao.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.chao.common.viewobject.SelectAllResult;
-import com.chao.service.ProductService;
+import com.chao.seller.service.ProductService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

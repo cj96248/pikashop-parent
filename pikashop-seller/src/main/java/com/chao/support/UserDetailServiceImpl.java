@@ -1,7 +1,7 @@
 package com.chao.support;
 
 import com.chao.mybatis.pojo.SellerDo;
-import com.chao.service.SellerService;
+import com.chao.seller.service.SellerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

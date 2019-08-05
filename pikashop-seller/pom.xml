@@ -19,17 +19,17 @@
         <!-- 自身依赖 -->
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-entity</artifactId>
+            <artifactId>pikashop-basic-entity</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-merchant-interface</artifactId>
+            <artifactId>pikashop-basic-interface</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-common</artifactId>
+            <artifactId>pikashop-basic-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- Spring -->

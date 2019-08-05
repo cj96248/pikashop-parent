@@ -1,4 +1,4 @@
-package com.chao.mybatis.mapper.website;
+package com.chao.mybatis.mapper;
 
 import com.chao.mybatis.website.pojo.ContentDo;
 import com.chao.mybatis.website.pojo.ContentDoExample;
@@ -18,6 +18,7 @@ public interface ContentDoMapper {
     int insertSelective(ContentDo record);
 
     List<ContentDo> selectByExample(ContentDoExample example);
+    List<ContentDo> findByCategoryId(Long categoryId);
 
     ContentDo selectByPrimaryKey(Long id);
 

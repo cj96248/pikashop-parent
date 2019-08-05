@@ -1,4 +1,4 @@
-package com.chao.mybatis.mapper.website;
+package com.chao.mybatis.mapper;
 
 import com.chao.mybatis.website.pojo.ContentCategoryDo;
 import com.chao.mybatis.website.pojo.ContentCategoryDoExample;

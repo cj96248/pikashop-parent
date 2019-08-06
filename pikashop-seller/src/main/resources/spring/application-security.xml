@@ -40,6 +40,6 @@
     </beans:bean>
     <beans:bean id="encryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
 
-    <dubbo:reference id="dubboSellerService" interface="com.chao.service.SellerService"></dubbo:reference>
+    <dubbo:reference id="dubboSellerService" interface="com.chao.seller.service.SellerService"></dubbo:reference>
 
 </beans:beans>

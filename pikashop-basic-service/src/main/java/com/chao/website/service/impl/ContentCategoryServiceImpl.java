@@ -2,7 +2,7 @@ package com.chao.website.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.chao.common.viewobject.CommonResult;
-import com.chao.mybatis.mapper.website.ContentCategoryDoMapper;
+import com.chao.mybatis.mapper.ContentCategoryDoMapper;
 import com.chao.mybatis.website.pojo.ContentCategoryDo;
 import com.chao.mybatis.website.pojo.ContentCategoryDoExample;
 import com.chao.website.service.ContentCategoryService;

@@ -8,15 +8,15 @@
   <artifactId>pikashop-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>pikashop-entity</module>
-    <module>pikashop-dao</module>
-    <module>pikashop-common</module>
-    <module>pikashop-interface</module>
-      <module>pikashop-service</module>
-    <module>pikashop-website-portal</module>
+    <module>pikashop-auto-generator</module>
+    <module>pikashop-basic-entity</module>
+    <module>pikashop-basic-dao</module>
+    <module>pikashop-basic-common</module>
+    <module>pikashop-basic-interface</module>
+    <module>pikashop-basic-service</module>
     <module>pikashop-seller</module>
+    <module>pikashop-website-portal</module>
     <module>pikashop-management</module>
-      <module>pikashop-auto-generator</module>
   </modules>
   <packaging>pom</packaging>
 

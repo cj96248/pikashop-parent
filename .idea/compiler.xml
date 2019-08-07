@@ -7,13 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="pikashop-auto-generator" />
-        <module name="pikashop-common" />
-        <module name="pikashop-dao" />
-        <module name="pikashop-entity" />
-        <module name="pikashop-interface" />
+        <module name="pikashop-basic-common" />
+        <module name="pikashop-basic-dao" />
+        <module name="pikashop-basic-entity" />
+        <module name="pikashop-basic-interface" />
+        <module name="pikashop-basic-service" />
         <module name="pikashop-management" />
         <module name="pikashop-seller" />
-        <module name="pikashop-service" />
         <module name="pikashop-website-portal" />
       </profile>
     </annotationProcessing>

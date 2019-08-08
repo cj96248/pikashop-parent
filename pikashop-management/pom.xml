@@ -9,15 +9,15 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
 
-    <artifactId>pikashop-management</artifactId>
+    <artifactId>pikashop-basic-management</artifactId>
 
-    <name>pikashop-management</name>
+    <name>pikashop-basic-management</name>
     <url>http://www.example.com</url>
 
     <dependencies>
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-interface</artifactId>
+            <artifactId>pikashop-basic-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- Spring -->

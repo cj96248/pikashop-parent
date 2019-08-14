@@ -38,7 +38,6 @@
                 <div class="box-body">
                     <!--tab页-->
                     <div class="nav-tabs-custom">
-
                         <!--tab头-->
                         <ul class="nav nav-tabs">                       		
                             <li class="active">
@@ -127,7 +126,6 @@
 								 <!-- 颜色图片 -->
 								 <div class="btn-group">
 					                 <button type="button" class="btn btn-default" title="新建" data-target="#uploadModal"  data-toggle="modal"  ng-click="imageItem={}"><i class="fa fa-file-o"></i> 新建</button>
-                             		                 
 					             </div>
 								 
 								 <table class="table table-bordered table-striped table-hover dataTable">
@@ -139,17 +137,14 @@
 					                    <tbody>
 					                      <tr ng-repeat="image in item.goodsDesc.itemImages">
 									            <td>
-									           		<img alt="上传后预览" src="{{image.thumbnail_url}}" width="100px" height="100px">
+									           		<img alt="上传后预览" ng-src="{{image.thumbnail_url}}" width="100px" height="100px">
 									            </td>
 												 <td> <button type="button" class="btn btn-default" title="删除" ng-click="removeImage($index)" ><i class="fa fa-trash-o"></i> 删除</button></td>
 					                      </tr>
 					                    </tbody>
 								 </table> 
-								  
                                 </div>
                             </div>
-                           
-                           
                             <!--扩展属性-->
                             <div class="tab-pane" id="customAttribute">
                                 <div class="row data-type">                                
@@ -167,13 +162,11 @@
                             	<div class="row data-type">
 	                            	<div class="col-md-2 title">是否启用规格</div>
 			                        <div class="col-md-10 data">
-			                        	<input type="checkbox" >			                           
+			                        	<input type="checkbox" ng-model="item.goods.isEnableSpec">
 			                        </div>
                             	</div>
                             	<p>
-                            	
                             	<div>
-                            	
 	                                <div class="row data-type">
 	                                
 		                                <div ng-repeat="spec in specList">
@@ -223,18 +216,14 @@
                         </div>
                         <!--tab内容/-->
 						<!--表单内容/-->
-							 
                     </div>
-                 	
                    </div>
                   <div class="btn-toolbar list-toolbar">
 				      <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i>保存</button>
 				      <button class="btn btn-default" >返回列表</button>
 				  </div>
-			
             </section>
-            
-            
+
 <!-- 上传窗口 -->
 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" >
@@ -258,7 +247,7 @@
 					                </button>
 					            </td>
 								<td>
-									<img  src="{{imageItem.thumbnail_url}}" alt="上传后预览" width="200px" height="200px">
+									<img  ng-src="{{imageItem.thumbnail_url}}" alt="上传后预览" width="200px" height="200px">
 								</td>
 							</tr>						
 						</table>
@@ -275,19 +264,14 @@
 	</div>
 </div>
 
-            
-            <!-- 正文区域 /-->
 <script type="text/javascript">
-
 	var editor;
 	KindEditor.ready(function(K) {
 		editor = K.create('textarea[name="content"]', {
 			allowFileManager : true
 		});
 	});
-
 </script>
        
 </body>
-
 </html>

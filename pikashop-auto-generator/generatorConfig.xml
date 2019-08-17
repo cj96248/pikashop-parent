@@ -41,7 +41,10 @@
 			<!-- enableSubPackages:是否让schema作为包的后缀 -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
+		<table schema="" tableName="tb_content" domainObjectName="ContentDo"></table>
+        <table schema="" tableName="tb_content_category" domainObjectName="ContentCategoryDo"></table>
 		<!-- 指定数据库表 -->
+		<!--
 		<table schema="" tableName="tb_goods" domainObjectName="GoodsDo"></table>
 		<table schema="" tableName="tb_goods_desc" domainObjectName="GoodsDescDo"></table>
 		<table schema="" tableName="tb_item" domainObjectName="ItemDo"></table>
@@ -54,6 +57,9 @@
 		<table schema="" tableName="tb_specification_option" domainObjectName="SpecOptionDo"></table>
 		<table schema="" tableName="tb_type_template" domainObjectName="TypeTemplateDo"></table>
 		<table schema="" tableName="tb_user" domainObjectName="UserDo"></table>
+		<table schema="" tableName="tb_content" domainObjectName="ContentDo"></table>
+        <table schema="" tableName="tb_content_category" domainObjectName="ContentCategoryDo"></table>
+		-->
 		<!-- 
       <table schema="" tableName="tb_address"></table>
       <table schema="" tableName="tb_areas"></table>

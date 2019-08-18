@@ -4,16 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.chao.mybatis.mapper.ItemDoMapper;
 import com.chao.mybatis.pojo.ItemDo;
 import lombok.extern.apachecommons.CommonsLog;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.solr.core.SolrTemplate;
+import org.springframework.data.solr.core.query.SimpleQuery;
+import org.springframework.data.solr.core.query.SolrDataQuery;
 
 import java.util.List;
 import java.util.Map;
 
 @CommonsLog
-public class ItemInsertion {
+public class ItemRemove {
 
     private static final String COLLECTION = "pikashop";
 
@@ -21,22 +24,10 @@ public class ItemInsertion {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:application-*.xml");
         SolrTemplate solrTemplate = context.getBean("solrTemplate",SolrTemplate.class);
 
-        ItemDoMapper itemDoMapper = context.getBean("itemDoMapper", ItemDoMapper.class);
-
-        List<ItemDo> items = itemDoMapper.selectByExample(null);
-        log.info("Retrieve item size " + items.size());
-
-        for(ItemDo item: items) {
-            Map specs = JSON.parseObject(item.getSpec(), Map.class);
-            item.setSpecMap(specs);
-        }
-        UpdateResponse updateResponse = solrTemplate.saveBeans(items);
-        if(updateResponse.getStatus() ==0){
-            log.info("Saving to Solr...");
-            solrTemplate.commit();
-        }else {
-            log.error("Failed feed!");
-        }
+        SolrDataQuery query = new SimpleQuery("*:*");
+        solrTemplate.delete(query);
+        solrTemplate.commit();
+        log.info("Delete all item in Solr");
     }
 
 }

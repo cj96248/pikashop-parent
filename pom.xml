@@ -9,6 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>pikashop-auto-generator</module>
+    <module>pikashop-auto-insert</module>
     <module>pikashop-basic-entity</module>
     <module>pikashop-basic-dao</module>
     <module>pikashop-basic-common</module>
@@ -43,7 +44,9 @@
     <freemarker.version>2.3.23</freemarker.version>
     <activemq.version>5.11.2</activemq.version>
     <security.version>3.2.3.RELEASE</security.version>
-    <solrj.version>4.10.3</solrj.version>
+    <solrj.version>6.2.1</solrj.version>
+    <spring-solr.version>1.5.5.RELEASE</spring-solr.version>
+    <spring-security.version>4.1.0.RELEASE</spring-security.version>
     <ik.version>2012_u6</ik.version>
   </properties>
 
@@ -160,11 +163,6 @@
         <artifactId>druid</artifactId>
         <version>${druid.version}</version>
       </dependency>
-      <dependency>
-        <groupId>org.csource.fastdfs</groupId>
-        <artifactId>fastdfs</artifactId>
-        <version>1.2</version>
-      </dependency>
       <!-- 文件上传组件 -->
       <dependency>
         <groupId>commons-fileupload</groupId>
@@ -196,12 +194,17 @@
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-web</artifactId>
-        <version>4.1.0.RELEASE</version>
+        <version>${spring-security.version}</version>
       </dependency>
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-config</artifactId>
-        <version>4.1.0.RELEASE</version>
+        <version>${spring-security.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-solr</artifactId>
+        <version>${spring-solr.version}</version>
       </dependency>
       <dependency>
         <groupId>com.github.penggle</groupId>
@@ -217,7 +220,7 @@
       <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-cas</artifactId>
-        <version>4.1.0.RELEASE</version>
+        <version>${spring-security.version}</version>
       </dependency>
       <dependency>
         <groupId>org.jasig.cas.client</groupId>
@@ -232,11 +235,7 @@
         </exclusions>
       </dependency>
       <!-- solr客户端 -->
-      <dependency>
-        <groupId>org.apache.solr</groupId>
-        <artifactId>solr-solrj</artifactId>
-        <version>${solrj.version}</version>
-      </dependency>
+
       <dependency>
         <groupId>com.janeluo</groupId>
         <artifactId>ikanalyzer</artifactId>
@@ -276,10 +275,7 @@
 
   </dependencyManagement>
 
-
-
   <build>
-
     <plugins>
       <!-- java编译插件 -->
       <plugin>
@@ -292,8 +288,6 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-
     </plugins>
-
   </build>
 </project>

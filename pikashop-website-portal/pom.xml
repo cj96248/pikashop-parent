@@ -105,7 +105,10 @@
                 <version>9.4.16.v20190411</version>
                 <configuration>
                     <!-- 指定端口 -->
-                    <stopPort>8300</stopPort>
+                   <httpConnector>
+                       <port>8300</port>
+                   </httpConnector>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
                     <!-- 请求路径 -->
                     <webApp>
                         <contextPath>/</contextPath>

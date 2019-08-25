@@ -13,15 +13,12 @@
 
     <name>pikashop-basic-interface</name>
 
-    <properties>
-
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.chao</groupId>
-            <artifactId>pikashop-entity</artifactId>
+            <artifactId>pikashop-basic-entity</artifactId>
             <version>${project.parent.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

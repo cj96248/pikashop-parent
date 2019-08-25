@@ -1,12 +1,14 @@
 package com.chao.website.service;
 
 import com.chao.common.viewobject.CommonResult;
-import com.chao.mybatis.pojo.ItemDo;
+import com.chao.common.viewobject.SearchParam;
 
 /**
  * 搜索服务接口
  */
 public interface SearchService {
 
-    CommonResult searchItem();
+    CommonResult searchItem(SearchParam param);
+
+    CommonResult highlightItem(SearchParam param);
 }

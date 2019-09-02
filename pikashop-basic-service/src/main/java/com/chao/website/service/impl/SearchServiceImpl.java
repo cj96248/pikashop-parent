@@ -5,6 +5,12 @@ import com.chao.common.viewobject.CommonResult;
 import com.chao.common.viewobject.SearchParam;
 import com.chao.mybatis.pojo.ItemDo;
 import com.chao.website.service.SearchService;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.FacetField;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.params.SolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
@@ -36,12 +42,32 @@ public class SearchServiceImpl implements SearchService {
         HighlightQuery query = new SimpleHighlightQuery();
         HighlightOptions options = new HighlightOptions();
         options.addField("title");
+        options.setSimplePrefix("<em style='color:red'>");
+        options.setSimplePostfix("</em>");
         query.setHighlightOptions(options);
         HighlightPage<ItemDo> itemDos = solrTemplate.queryForHighlightPage(query, ItemDo.class);
         List<HighlightEntry.Highlight> highlights = itemDos.getHighlighted().get(0).getHighlights();
         for (HighlightEntry.Highlight highlight : highlights) {
             List<String> snipplets = highlight.getSnipplets();
         }
+        return CommonResult.build(content.size(), content);
+    }
+
+    public CommonResult highlightWithFacetItem(SearchParam param) throws Exception {
+        List<ItemDo> content = new ArrayList<>();
+
+        SolrServer solrServer = solrTemplate.getSolrServer();
+        SolrQuery params = new SolrQuery();
+        params.setFacet(true);
+        params.setFacetPrefix("brand", "brand");
+        params.setFacetLimit(1);
+        params.setHighlight(true);
+        params.setHighlightSimplePre("<em style='color:red'>");
+        params.setHighlightSimplePost("</em>");
+        QueryResponse response = solrServer.query(params);
+
+        response.getFacetField("brand");
+
         return CommonResult.build(content.size(), content);
     }
 

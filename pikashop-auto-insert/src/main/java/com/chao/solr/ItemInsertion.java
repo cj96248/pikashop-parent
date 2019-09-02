@@ -18,7 +18,7 @@ public class ItemInsertion {
     private static final String COLLECTION = "pikashop";
 
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:application-*.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:application-*.xml");
         SolrTemplate solrTemplate = context.getBean("solrTemplate",SolrTemplate.class);
 
         ItemDoMapper itemDoMapper = context.getBean("itemDoMapper", ItemDoMapper.class);

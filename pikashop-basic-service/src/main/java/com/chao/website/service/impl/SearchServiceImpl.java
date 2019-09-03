@@ -3,6 +3,7 @@ package com.chao.website.service.impl;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.chao.common.viewobject.CommonResult;
 import com.chao.common.viewobject.SearchParam;
+import com.chao.common.viewobject.SearchResult;
 import com.chao.mybatis.pojo.ItemDo;
 import com.chao.website.service.SearchService;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -54,6 +55,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     public CommonResult highlightWithFacetItem(SearchParam param) throws Exception {
+        SearchResult result = new SearchResult();
         List<ItemDo> content = new ArrayList<>();
 
         SolrServer solrServer = solrTemplate.getSolrServer();
@@ -66,9 +68,12 @@ public class SearchServiceImpl implements SearchService {
         params.setHighlightSimplePost("</em>");
         QueryResponse response = solrServer.query(params);
 
-        response.getFacetField("brand");
+        FacetField brand = response.getFacetField("brand");
 
-        return CommonResult.build(content.size(), content);
+        result.setContent(content);
+        result.setBrand(brand.getValues());
+
+        return CommonResult.build(content.size(), result);
     }
 
 }

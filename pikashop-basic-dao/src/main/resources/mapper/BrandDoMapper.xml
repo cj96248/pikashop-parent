@@ -5,9 +5,10 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, logo
+    id, name, logo, pic
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 

@@ -32,13 +32,10 @@
     <script type="text/javascript" src="../js/base.js"></script>
     <script type="text/javascript" src="../js/service/loginService.js"></script>
     <script type="text/javascript" src="../js/controller/loginController.js"></script>
-
 </head>
 
 <body class="hold-transition skin-green sidebar-mini" ng-app="pikashop" ng-controller="loginController" ng-init="showLoginName()">
-
     <div class="wrapper">
-
         <!-- 页面头部 -->
         <header class="main-header">
             <!-- Logo -->
@@ -60,20 +57,19 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../img/manager/{{loginName}}.jpg" class="user-image" alt="User Image">
+                                <img ng-src="../img/manager/{{loginName}}.jpg" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{loginName}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../img/manager/{{loginName}}.jpg" class="img-circle" alt="User Image">
+                                    <img ng-src="../img/manager/{{loginName}}.jpg" class="img-circle" alt="User Image">
 
                                     <p>
                                         {{loginName}}
                                         <small>最后登录 {{loginTime}}</small>
                                     </p>
                                 </li>
-                                
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
@@ -99,16 +95,13 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="../img/manager/{{loginName}}.jpg" class="img-circle" alt="User Image">
+                        <img ng-src="../img/manager/{{loginName}}.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p> {{loginName}}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                     </div>
                 </div>
-              
-                <!-- /.search form -->
-
 
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu"  >
@@ -212,6 +205,5 @@
         </div>
         <!-- 内容区域 /-->
     </div>
-
 </body>
 </html>

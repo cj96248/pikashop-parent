@@ -9,6 +9,8 @@ public class BrandDo implements Serializable {
 
     private String logo;
 
+    private String pic;
+
     public Long getId() {
         return id;
     }
@@ -31,5 +33,13 @@ public class BrandDo implements Serializable {
 
     public void setLogo(String logo) {
         this.logo = logo == null ? null : logo.trim();
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

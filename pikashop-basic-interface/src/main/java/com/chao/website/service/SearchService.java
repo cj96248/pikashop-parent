@@ -10,5 +10,5 @@ public interface SearchService {
 
     CommonResult searchItem(SearchParam param);
 
-    CommonResult highlightItem(SearchParam param);
+    CommonResult highlightWithFacetItem(SearchParam param) throws Exception;
 }

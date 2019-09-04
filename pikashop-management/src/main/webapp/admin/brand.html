@@ -145,6 +145,7 @@
 										  <th class="sorting_asc">品牌编号</th>
 									      <th class="sorting">品牌名称</th>									      
 									      <th class="sorting">品牌标志字母</th>
+										  <th class="sorting">品牌图标</th>
 					                      <th class="text-center">操作</th>
 			                          </tr>
 			                      </thead>
@@ -154,6 +155,7 @@
 				                          <td>{{b.id}}</td>
 									      <td>{{b.name}}</td>
 		                                  <td>{{b.logo}}</td>
+										  <td><img ng-src="{{b.pic}}" style="width: 100px"></td>
 		                                  <td class="text-center">                                           
 		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(b.id)" >修改</button>
 		                                  </td>

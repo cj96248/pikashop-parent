@@ -21,8 +21,8 @@ public class SearchController {
         return searchService.searchItem(param);
     }
 
-    @RequestMapping(value = "/hight", method = RequestMethod.POST)
-    public CommonResult search4Highlight(@RequestBody SearchParam param){
-        return searchService.searchItem(param);
+    @RequestMapping(value = "/facet", method = RequestMethod.POST)
+    public CommonResult search4Highlight(@RequestBody SearchParam param) throws Exception {
+        return searchService.highlightWithFacetItem(param);
     }
 }

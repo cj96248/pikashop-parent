@@ -8,15 +8,12 @@ import com.chao.mybatis.pojo.ItemDo;
 import com.chao.website.service.SearchService;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.FacetField;
 import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.common.params.SolrParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
-import org.springframework.data.solr.core.query.*;
-import org.springframework.data.solr.core.query.result.HighlightEntry;
-import org.springframework.data.solr.core.query.result.HighlightPage;
+import org.springframework.data.solr.core.query.Query;
+import org.springframework.data.solr.core.query.SimpleQuery;
 import org.springframework.data.solr.core.query.result.ScoredPage;
 
 import java.util.ArrayList;
@@ -37,23 +34,6 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public CommonResult highlightItem(SearchParam param) {
-        List<ItemDo> content = new ArrayList<>();
-
-        HighlightQuery query = new SimpleHighlightQuery();
-        HighlightOptions options = new HighlightOptions();
-        options.addField("title");
-        options.setSimplePrefix("<em style='color:red'>");
-        options.setSimplePostfix("</em>");
-        query.setHighlightOptions(options);
-        HighlightPage<ItemDo> itemDos = solrTemplate.queryForHighlightPage(query, ItemDo.class);
-        List<HighlightEntry.Highlight> highlights = itemDos.getHighlighted().get(0).getHighlights();
-        for (HighlightEntry.Highlight highlight : highlights) {
-            List<String> snipplets = highlight.getSnipplets();
-        }
-        return CommonResult.build(content.size(), content);
-    }
-
     public CommonResult highlightWithFacetItem(SearchParam param) throws Exception {
         SearchResult result = new SearchResult();
         List<ItemDo> content = new ArrayList<>();

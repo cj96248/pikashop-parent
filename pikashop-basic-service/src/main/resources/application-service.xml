@@ -11,8 +11,9 @@
     <dubbo:protocol name="dubbo" port="20881"></dubbo:protocol>
 
     <dubbo:application name="pikashop-basic-service"/>
-    <dubbo:registry address="zookeeper://192.168.99.100:2181" timeout="50000"/>
+    <dubbo:registry address="zookeeper://10.0.75.1:2181" timeout="50000"/>
     <dubbo:annotation package="com.chao"/>
+    <dubbo:provider  timeout="5000"></dubbo:provider>
 
 
 </beans>

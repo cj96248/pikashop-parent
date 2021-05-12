@@ -46,7 +46,7 @@
     <security.version>3.2.3.RELEASE</security.version>
     <solrj.version>6.2.1</solrj.version>
     <spring-solr.version>1.5.5.RELEASE</spring-solr.version>
-    <spring-security.version>4.1.0.RELEASE</spring-security.version>
+    <spring-security.version>5.2.10.RELEASE</spring-security.version>
     <ik.version>2012_u6</ik.version>
   </properties>
 
